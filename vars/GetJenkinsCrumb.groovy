@@ -1,0 +1,6 @@
+
+def call() {
+    def crumbResponse = sh(script: "curl -s -X GET http://${SERVER}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb) --user admin:admin", returnStdout: true).trim()
+    def crumb = sh(script: "echo \"${crumbResponse}\" | grep -oP '(?<=<crumb>).*(?=<\\/crumb>)' | awk -F: '{print \$2}'", returnStdout: true).trim()
+    return crumb
+}
