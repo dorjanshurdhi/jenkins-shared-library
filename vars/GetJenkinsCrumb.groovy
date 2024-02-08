@@ -7,5 +7,5 @@ def call() {
 
     sh 'pwd'
     sh 'ls -la'
-    sh(script: "sh ../scripts/getjenkinscrumb.sh")
+    //sh(script: "sh ../scripts/getjenkinscrumb.sh")
 }
