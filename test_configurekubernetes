@@ -1,0 +1,3 @@
+@Library('my-shared-library') _
+
+configureKubernetes('path/to/kubeconfig', 'credentialId', 'namespace')

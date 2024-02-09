@@ -1,0 +1,11 @@
+@Library('my-shared-library') _
+
+configureKubernetes(
+    kubeConfig: 'path/to/kubeconfig',
+    cloud: 'my-kubernetes',
+    defaultPodTemplate: 'my-pod-template',
+    credentialsId: 'kube-credentials',
+    namespace: 'my-namespace',
+    replicas: 3
+    // Altre opzioni di configurazione
+)
