@@ -48,8 +48,8 @@ def call(String serverUrl, String credentialsId, String namespace) {
         }
 
         // Salva le modifiche alla configurazione globale di Jenkins
-        jenkinsInstance.clouds = clouds
-        jenkinsInstance.save()
+        //jenkinsInstance.clouds = clouds
+        clouds.save()
         
         println("Plugin Kubernetes configurato con successo!")
     } else {
