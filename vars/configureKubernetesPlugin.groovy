@@ -6,7 +6,7 @@ import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.CredentialsMatchers
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
 
-def configureKubernetesPlugin(String serverUrl, String credentialsId, String namespace) {
+def call(String serverUrl, String credentialsId, String namespace) {
     // Ottieni l'istanza di Jenkins
     def jenkinsInstance = Jenkins.getInstance()
 
