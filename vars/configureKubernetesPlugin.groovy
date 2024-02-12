@@ -28,7 +28,7 @@ def call(String serverUrl, String credentialsId, String namespace) {
       //      return
       //  }
 
-        cloud.setCredentialsId(credentials.id)
+      //  cloud.setCredentialsId(credentials.id)
 
         // Aggiungi o aggiorna il cloud Kubernetes alla configurazione globale di Jenkins
         def clouds = jenkinsInstance.clouds
