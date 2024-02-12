@@ -21,12 +21,12 @@ def call(String serverUrl, String credentialsId, String namespace) {
         cloud.setNamespace(namespace)
 
         // Ottieni le credenziali dall'archivio di Jenkins
-        def credentials = CredentialsProvider.findCredentialById(credentialsId, StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
+       // def credentials = CredentialsProvider.findCredentialById(credentialsId, StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
 
-        if (credentials == null) {
-            println("Le credenziali con ID $credentialsId non sono state trovate.")
-            return
-        }
+      //  if (credentials == null) {
+      //      println("Le credenziali con ID $credentialsId non sono state trovate.")
+      //      return
+      //  }
 
         cloud.setCredentialsId(credentials.id)
 
