@@ -36,7 +36,7 @@ pipeline{
                                 'workingDir': '/home/jenkins/agent',
                                 'envVars': [
                                     ['key': 'MY_ENV_VAR', 'value': 'my-value']
-                                ]//,
+                                ],
                  //               'ports': [
                  //                   ['containerPort': 8080, 'hostPort': 8080]
                  //              ],
