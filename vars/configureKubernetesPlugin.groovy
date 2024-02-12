@@ -16,7 +16,7 @@ def call(String serverUrl, String credentialsId, String namespace) {
     // Verifica se il plugin è installato
     if (kubernetesPlugin != null) {
         // Imposta la configurazione del plugin Kubernetes
-        def cloud = new KubernetesCloud('kubernetes')
+        def cloud = new KubernetesCloud('kubernetes-test')
         cloud.setServerUrl(serverUrl)
         cloud.setNamespace(namespace)
 
@@ -35,7 +35,7 @@ def call(String serverUrl, String credentialsId, String namespace) {
         boolean found = false
         for (c in clouds) {
             if (c instanceof KubernetesCloud) {
-                if (c.name.equals('kubernetes')) {
+                if (c.name.equals('kubernetes-test')) {
                     clouds.remove(c)
                     clouds.add(cloud)
                     found = true
