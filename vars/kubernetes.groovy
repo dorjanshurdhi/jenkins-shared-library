@@ -5,7 +5,7 @@ import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
 
-def call(Map<String, Object> configMap,List<Map<String, String>> labels) {
+def call(Map<String, Object> configMap) {
     // Ottieni l'istanza di Jenkins
     def jenkinsInstance = Jenkins.getInstance()
 
@@ -42,7 +42,16 @@ def call(Map<String, Object> configMap,List<Map<String, String>> labels) {
         //cloud.setConnectionTimeout(configMap['connectionTimeout'])
         //cloud.setReadTimeout(configMap['readTimeout'])
         //cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
-        cloud.setPodLabels(labels)
+        
+        def podLabels = []
+        def label1 = new PodLabel('jenkins', 'slave')
+        def label2 = new PodLabel('jenkins', 'agent')
+        podLabels.add(label1)
+        podLabels.add(label2)
+        
+        // Ora puoi passare la lista di podLabels al metodo setPodLabels
+        cloud.setPodLabels(podLabels)
+        //cloud.setPodLabels(labels)
 
         // Ottieni le credenziali dall'archivio di Jenkins
       ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())

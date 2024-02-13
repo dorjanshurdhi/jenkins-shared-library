@@ -34,7 +34,7 @@ pipeline{
                            ['jenkins': 'agent'],
                            ['japp.kubernetes.io/managed-by': 'jenkins']
                     ]
-                    kubernetes(configMap,podLabels)                
+                    kubernetes(configMap)                
                 }
             }
         }
