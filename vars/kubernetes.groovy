@@ -41,7 +41,7 @@ def call(Map<String, Object> configMap) {
         //cloud.setConnectionTimeout(30000)
         //cloud.setReadTimeout(configMap['readTimeout'])
         //cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
-        cloud.setPodLabels(configMap['podLabels'])
+        cloud.setLabels(configMap['podLabels'])
 
         // Ottieni le credenziali dall'archivio di Jenkins
       ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
