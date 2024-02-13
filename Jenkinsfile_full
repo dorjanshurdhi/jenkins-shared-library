@@ -1,5 +1,3 @@
-@Library('jenkins-shared-library') _
-
 pipeline {
     agent {
         node {
@@ -17,40 +15,49 @@ pipeline {
                         'namespace': 'devops-tools',
                         'credentialsId': 'kubernetes-id',
                         'podTemplate': [
-                            'label': 'kubeagent',
-                            'name': 'kube-agent',
-                            'namespace': 'devops-tools',
-                            'nodeSelector': 'my-node-selector',
-                            'instanceCap': 10,
-                            'container': [
-                                'name': 'jnlp',
-                                'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
-                                'command': 'my-container-command',
-                                'args': 'my-container-args',
-                                'resourceRequestCpu': '500m',
-                                'resourceRequestMemory': '512Mi',
-                                'resourceLimitCpu': '1',
-                                'resourceLimitMemory': '1Gi',
-                                'alwaysPullImage': true,
-                                'workingDir': '/home/jenkins/agent',
-                                'envVars': [
+                            label: 'kubeagent',
+                            name: 'kube-agent',
+                            namespace: 'devops-tools',
+                            nodeSelector: 'my-node-selector',
+                            instanceCap: 10,
+                            container: [ // Correzione da 'containers' a 'container'
+                                name: 'jnlp',
+                                image: 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
+                                command: 'my-container-command',
+                                args: 'my-container-args',
+                                resourceRequestCpu: '500m',
+                                resourceRequestMemory: '512Mi',
+                                resourceLimitCpu: '1',
+                                resourceLimitMemory: '1Gi',
+                                alwaysPullImage: true,
+                                workingDir: '/home/jenkins/agent',
+                                envVars: [
                                     ['key': 'MY_ENV_VAR', 'value': 'my-value']
                                 ],
-                                'ports': [
+                                ports: [
                                     ['containerPort': 8080, 'hostPort': 8080]
                                 ],
-                                'ttyEnabled': true,
-                                'privileged': true,
-                                'securityContext': [
+                                ttyEnabled: true,
+                                privileged: true,
+                                securityContext: [
                                     'runAsUser': 1000,
                                     'runAsGroup': 1000,
                                     'fsGroup': 2000
+                                ],
+                                // Monta il persistent volume claim nel container
+                                volumeMounts: [
+                                    [
+                                        name: 'jenkins-agent',
+                                        mountPath: '/tmp'
+                                    ]
                                 ]
                             ],
-                            'volume': [ // Cambiato da 'volumes' a 'volume'
-                                'type': 'HostPathVolume',
-                                'mountPath': '/host/path',
-                                'hostPath': '/path/on/host'
+                            // Definisci il persistent volume claim
+                            volume: [ // Correzione da 'volumes' a 'volume'
+                                name: 'jenkins-agent',
+                                persistentVolumeClaim: [
+                                    claimName: 'jenkins-agent'
+                                ]
                             ]
                         ] // Fine della mappa podTemplate
                     ] // Fine della mappa configMap

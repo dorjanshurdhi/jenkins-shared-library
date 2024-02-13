@@ -30,7 +30,7 @@ def call(Map<String, Object> configMap) {
 
     ////   cloud.setCredentialsId(credentials.id)
 
-        // Configura podTemplate se presente nei dati
+          // Configura podTemplate se presente nei dati
         if (configMap.containsKey('podTemplate')) {
             def podTemplateData = configMap['podTemplate']
             def podTemplate = new PodTemplate()
@@ -39,8 +39,8 @@ def call(Map<String, Object> configMap) {
             podTemplate.setNamespace(podTemplateData['namespace'])
             podTemplate.setNodeSelector(podTemplateData['nodeSelector'])
             podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
-
-            // Configura il container
+            
+            // Configura il container nel podTemplate
             def containerData = podTemplateData['container']
             def container = new ContainerTemplate(
                 name: containerData['name'],
@@ -57,20 +57,27 @@ def call(Map<String, Object> configMap) {
                 ports: containerData['ports'] as List<Map<String, Integer>>,
                 ttyEnabled: containerData['ttyEnabled'] as boolean,
                 privileged: containerData['privileged'] as boolean,
-                securityContext: containerData['securityContext'] as Map<String, Object>
+                securityContext: containerData['securityContext'] as Map<String, Object>,
+                // Monta il persistent volume claim nel container
+                volumeMounts: [
+                    [
+                        name: podTemplateData['volume'].name,
+                        mountPath: podTemplateData['volume'].mountPath
+                    ]
+                ]
             )
             podTemplate.getContainers().add(container)
 
-            // Configura il volume
-            def volumeData = podTemplateData['volume']
-            def volume
-            if (volumeData['type'] == 'HostPathVolume') {
-                volume = new HostPathVolume(mountPath: volumeData['mountPath'], hostPath: volumeData['hostPath'])
-            } else {
-                volume = new EmptyDirVolume(mountPath: volumeData['mountPath'])
-            }
-            podTemplate.getVolumes().add(volume)
-
+            // Definisci il persistent volume claim nel podTemplate
+            podTemplate.setVolumes([
+                [
+                    name: podTemplateData['volume'].name,
+                    persistentVolumeClaim: [
+                        claimName: podTemplateData['volume'].persistentVolumeClaim.claimName
+                    ]
+                ]
+            ])
+            
             cloud.setTemplates([podTemplate])
         }
 
