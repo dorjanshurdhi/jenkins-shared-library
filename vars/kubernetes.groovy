@@ -53,8 +53,8 @@ def call(Map<String, Object> configMap) {
         cloud.setPodLabels(podLabels)
 
         //Verifica la presenza del CredentialsId su jenkins
-        if (credentialsExist) {
-            cloud.setCredentialsId(credentials.id)
+        if (checkCredentialsExistence("kubernetes-id")) {
+            cloud.setCredentialsId("kubernetes-id")
         } else {
             println("Le credenziali con ID $credentialsId non esistono su Jenkins")
             return
