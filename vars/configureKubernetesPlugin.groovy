@@ -57,7 +57,7 @@ def call(Map<String, Object> configMap) {
                     envVars: containerData['envVars'] as List<Map<String, String>>,
                     //ports: containerData['ports'] as List<Map<String, Integer>>,
                     //ttyEnabled: containerData['ttyEnabled'] as boolean,
-                    privileged: containerData['privileged'] as boolean,
+                    privileged: containerData['privileged'] as boolean//,
                     //securityContext: containerData['securityContext'] as Map<String, Object>
                 )
                 podTemplate.getContainers().add(container)
