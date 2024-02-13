@@ -38,9 +38,9 @@ def call(Map<String, Object> configMap) {
         //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
-        //cloud.setConnectionTimeout(30000)
-        //cloud.setReadTimeout(configMap['readTimeout'])
-        //cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
+        cloud.setConnectionTimeout(configMap['connectionTimeout'])
+        cloud.setReadTimeout(configMap['readTimeout'])
+        cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
         //cloud.setPodLabels([configMap['podLabels']])
 
         // Ottieni le credenziali dall'archivio di Jenkins
