@@ -12,8 +12,21 @@ def call(Map<String, Object> configMap) {
     // Ottieni il plugin Kubernetes
     def kubernetesPlugin = jenkinsInstance.getPlugin('kubernetes')
 
+
     // Verifica se il plugin è installato
     if (kubernetesPlugin != null) {
+        // Verifica se esiste già un cloud Kubernetes con lo stesso nome
+        def kubernetesName = configMap['kubernetes-partner-name']
+        def existingCloud = jenkinsInstance.clouds.find { cloud ->
+         cloud instanceof org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud && cloud.name == kubernetesName
+        }
+
+        // Se esiste già un cloud Kubernetes con lo stesso nome, stampa un messaggio e interrompi lo script
+        if (existingCloud) {
+            println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
+            return
+        }
+
         // Imposta la configurazione del plugin Kubernetes
         def cloud = new KubernetesCloud(configMap['kubernetes-partner-name'])
         cloud.setServerUrl(configMap['serverUrl'])
