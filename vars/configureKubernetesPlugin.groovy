@@ -36,8 +36,8 @@ def call(Map<String, Object> configMap) {
             podTemplate.setLabel(podTemplateData['label'])
             podTemplate.setName(podTemplateData['name'])
             podTemplate.setNamespace(podTemplateData['namespace'])
-            podTemplate.setNodeSelector(podTemplateData['nodeSelector'])
-            podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
+            //podTemplate.setNodeSelector(podTemplateData['nodeSelector'])
+            //podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
             
             // Configura i containers
             def containers = podTemplateData['containers'] as List<Map<String, Object>>
