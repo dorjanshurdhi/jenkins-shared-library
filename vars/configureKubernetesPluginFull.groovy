@@ -41,9 +41,7 @@ def call(Map<String, Object> configMap) {
             podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
             
             // Configura i containers
-            def containers = podTemplateData['containers'] as List<Map<String, Object>>
-            containers.each { containerData ->
-            //println("Container name: ${containerData['name']}")
+             def containerData = podTemplateData['container']
                 def container = new ContainerTemplate(
                     name: containerData['name'],
                     image: containerData['image'],
@@ -61,8 +59,8 @@ def call(Map<String, Object> configMap) {
                     privileged: containerData['privileged'] as boolean,
                     securityContext: containerData['securityContext'] as Map<String, Object>
                 )
-                podTemplate.getContainers().add(container)
-            }
+            podTemplate.getContainers().add(container)
+
 
             // Configura i volumes
             def volumes = podTemplateData['volumes'] as List<Map<String, String>>
