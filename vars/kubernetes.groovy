@@ -119,7 +119,6 @@ def call(Map<String, Object> configMap) {
         clouds.add(cloud)
 
         // Salva le modifiche alla configurazione globale di Jenkins
-        jenkinsInstance.clouds = clouds
         jenkinsInstance.save()
         
         println("Plugin Kubernetes configurato con successo!")
