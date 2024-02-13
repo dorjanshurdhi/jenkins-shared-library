@@ -22,14 +22,18 @@ pipeline{
                        'setSkipTlsVerify': false,
                        'jenkinsURL': "${params.jenkinsURL}",
                        'jenkinsTunnel': "${params.jenkinsTunnel}",
-                       'podLabels': [['jenkins':'slave'],['jenkins':'agent']],
+                       //'podLabels': [['jenkins':'slave'],['jenkins':'agent']],
                        'podTemplate': [
                            'label': 'kubeagent',
                            'name': 'kube-agent',
                            'namespace': 'devops-tools'
                         ]
                     ]
-                    kubernetes(configMap)                
+                    def podLabels = [
+                           ['jenkins': 'slave'],
+                           ['jenkins': 'agent']
+                    ]
+                    kubernetes(configMap,podLabels)                
                 }
             }
         }
