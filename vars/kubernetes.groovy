@@ -77,9 +77,9 @@ def call(Map<String, Object> configMap) {
             println "eccomi " +containerData
             println "name " +containerData['name']
             println "image " +containerData['image']
-           // def container = new ContainerTemplate(
-           //     name: containerData['name'],
-            //    image: containerData['image']//,
+            def container = new ContainerTemplate(
+                name: containerData['name'],
+                image: containerData['image']
             //    command: containerData['command'],
             //    args: containerData['args'],
             //    resourceRequestCpu: containerData['resourceRequestCpu'],
@@ -100,8 +100,8 @@ def call(Map<String, Object> configMap) {
             //            mountPath: podTemplateData['volume'].mountPath
             //        ]
             //    ]
-            //)
-           // podTemplate.getContainers().add(container)
+            )
+           podTemplate.getContainers().add(container)
 
             // Definisci il persistent volume claim nel podTemplate
            //podTemplate.setVolumes([
