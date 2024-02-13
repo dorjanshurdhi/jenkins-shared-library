@@ -87,11 +87,7 @@ def call(Map<String, Object> configMap) {
                 containerData['image']
             )
 
-            container.setAlwaysPullImage​(true)
-            println "primo" + container.isAlwaysPullImage()
-            container.setPrivileged​(true)
-            println "secondo" + container.isPrivileged()
-            println
+            container.setAlwaysPullImage(true)
             //container.setWorkingDir​(containerData['workingDir'])
 
             //container.setArgs​(String args)
