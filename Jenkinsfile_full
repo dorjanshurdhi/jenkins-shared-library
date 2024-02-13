@@ -25,33 +25,33 @@ pipeline {
                             container: [ // Correzione da 'containers' a 'container'
                                 name: 'jnlp',
                                 image: 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
-                                command: 'my-container-command',
-                                args: 'my-container-args',
-                                resourceRequestCpu: '500m',
-                                resourceRequestMemory: '512Mi',
-                                resourceLimitCpu: '1',
-                                resourceLimitMemory: '1Gi',
-                                alwaysPullImage: true,
-                                workingDir: '/home/jenkins/agent',
-                                envVars: [
-                                    ['key': 'MY_ENV_VAR', 'value': 'my-value']
-                                ],
-                                ports: [
-                                    ['containerPort': 8080, 'hostPort': 8080]
-                                ],
-                                ttyEnabled: true,
-                                privileged: true,
-                                securityContext: [
-                                    'runAsUser': 1000,
-                                    'runAsGroup': 1000,
-                                    'fsGroup': 2000
-                                ],
-                                // Monta il persistent volume claim nel container
-                                volumeMounts: [
-                                    [
-                                        name: 'jenkins-agent',
-                                        mountPath: '/tmp'
-                                    ]
+                                //command: 'my-container-command',
+                                //args: 'my-container-args',
+                                //resourceRequestCpu: '500m',
+                                //resourceRequestMemory: '512Mi',
+                                //resourceLimitCpu: '1',
+                                //resourceLimitMemory: '1Gi',
+                                //alwaysPullImage: true,
+                                //workingDir: '/home/jenkins/agent',
+                                //envVars: [
+                                //    ['key': 'MY_ENV_VAR', 'value': 'my-value']
+                                //],
+                                //ports: [
+                                //    ['containerPort': 8080, 'hostPort': 8080]
+                                //],
+                                //ttyEnabled: true,
+                                //privileged: true,
+                                //securityContext: [
+                                //    'runAsUser': 1000,
+                                //    'runAsGroup': 1000,
+                                //    'fsGroup': 2000
+                                //],
+                                //// Monta il persistent volume claim nel container
+                                //volumeMounts: [
+                                //    [
+                                //        name: 'jenkins-agent',
+                                //        mountPath: '/tmp'
+                                //    ]
                                 ]
                             ],
                             // Definisci il persistent volume claim
