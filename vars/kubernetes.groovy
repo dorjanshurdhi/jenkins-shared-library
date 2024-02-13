@@ -36,7 +36,7 @@ def call(Map<String, Object> configMap) {
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
         //cloud.setServerCertificate(configMap['serverCertificate'])
         cloud.setCredentialsId(configMap['credentialsId'])
-        cloud.setSkipTlsVerify(configMap['setSkipTlsVerify'])
+        cloud.setSkipTlsVerify(configMap['skipTlsVerify'])
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
         //cloud.setConnectionTimeout(configMap['connectionTimeout'])
@@ -80,19 +80,26 @@ def call(Map<String, Object> configMap) {
             def container = new ContainerTemplate(
                 containerData['name'],
                 containerData['image']
-            //    command: containerData['command'],
-            //    args: containerData['args'],
-            //    resourceRequestCpu: containerData['resourceRequestCpu'],
-            //    resourceRequestMemory: containerData['resourceRequestMemory'],
-            //    resourceLimitCpu: containerData['resourceLimitCpu'],
-            //    resourceLimitMemory: containerData['resourceLimitMemory'],
-            //    alwaysPullImage: containerData['alwaysPullImage'] as boolean,
-            //    workingDir: containerData['workingDir'],
-            //    envVars: containerData['envVars'] as List<Map<String, String>>,
-            //    ports: containerData['ports'] as List<Map<String, Integer>>,
-            //    ttyEnabled: containerData['ttyEnabled'] as boolean,
-            //    privileged: containerData['privileged'] as boolean,
-            //    securityContext: containerData['securityContext'] as Map<String, Object>,
+            )
+
+            container.setAlwaysPullImage​(boolean alwaysPullImage)
+            container.setPrivileged​(boolean privileged)
+            container.setWorkingDir​(String workingDir)
+
+            //container.setArgs​(String args)
+            //container.setCommand​(String command)
+            //container.setResourceRequestCpu​(String resourceRequestCpu)
+            //container.setResourceRequestMemory​(String resourceRequestMemory)
+            //container.setResourceLimitCpu​(String resourceLimitCpu)
+            //container.setResourceLimitMemory​(String resourceLimitMemory)
+            //container.setResourceRequestEphemeralStorage​(String resourceRequestEphemeralStorage)
+            //container.setRunAsGroup​(String runAsGroup)
+            //container.setRunAsUser​(String runAsUser)
+            //container.setShell​(String shell)
+            //container.setTtyEnabled​(boolean ttyEnabled)
+            //container.setEnvVars​(List<TemplateEnvVar> envVars)
+
+
             //    // Monta il persistent volume claim nel container
             //    volumeMounts: [
             //        [
@@ -100,7 +107,7 @@ def call(Map<String, Object> configMap) {
             //            mountPath: podTemplateData['volume'].mountPath
             //        ]
             //    ]
-            )
+            
            podTemplate.getContainers().add(container)
 
             // Definisci il persistent volume claim nel podTemplate

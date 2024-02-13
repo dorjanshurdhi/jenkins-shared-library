@@ -19,7 +19,7 @@ pipeline{
                        'namespace': "${params.namespace}",
                        'credentialsId': "kubernetes-id",
                        'useJenkinsProxy': false,
-                       'setSkipTlsVerify': false,
+                       'skipTlsVerify': false,
                        'jenkinsURL': "${params.jenkinsURL}",
                        'jenkinsTunnel': "${params.jenkinsTunnel}",
                        'podTemplate': [
@@ -28,7 +28,11 @@ pipeline{
                            'namespace': 'devops-tools',
                            'container': [ 
                                 'name': 'jnlp',
-                                'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0'
+                                'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
+                                'alwaysPullImage': true,
+                                'privileged': true,
+                                'workingDir': 'home/jenkins/agent'​
+
                             ]
                         ]
                     ]
