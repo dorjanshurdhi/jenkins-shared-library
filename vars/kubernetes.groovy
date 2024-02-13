@@ -19,7 +19,7 @@ def call(Map<String, String> configMap) {
         cloud.setServerUrl(configMap['serverUrl'])
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
-        cloud.setDisableHTTPCertificateCheck(false)
+        //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsURL(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
         cloud.setConnectionTimeout(configMap['connectionTimeout'])
