@@ -24,18 +24,24 @@ def call(Map<String, Object> configMap) {
         // Se esiste già un cloud Kubernetes con lo stesso nome, stampa un messaggio e interrompi lo script
         if (existingCloud) {
 
-             def userInput = input(id: 'userInput', message: 'Questo Cloud è già configurato, vuoi procedere comunque?',
-             parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'NO', 
-                description:'describing choices', name:'SCEGLI', choices: "SI\nNO"]
-             ])
+             // Define Variable
+             def USER_INPUT = input(
+                    message: 'Questo Cloud è già configurato, vuoi procedere comunque?',
+                    parameters: [
+                            [$class: 'ChoiceParameterDefinition',
+                             choices: ['NO','SI'].join('\n'),
+                             name: 'input',
+                             description: 'Menu - select box option']
+                    ])
 
-            println(userInput); //Use this value to branch to different logic if needed
-            if(userInput.equals("NO")) {
+            echo "The answer is: ${USER_INPUT}"
+
+            if( "${USER_INPUT}" == "NO"){
                 println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
                 currentBuild.result = 'UNSTABLE'
                 unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
                 return
-            }
+            }  
         }
 
         // Imposta la configurazione del plugin Kubernetes
