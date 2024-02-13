@@ -19,7 +19,7 @@ def call(Map<String, Object> configMap) {
         cloud.setServerUrl(configMap['serverUrl'])
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
-        cloud.setConfig(configMap['kubeconfig'])
+        cloud.setServerCertificate(configMap['serverCertificate])
         //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
