@@ -11,7 +11,7 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name': "${params.kubernetesPartnerName}",
+                       'kubernetesPartnerName': "${params.kubernetesPartnerName}",
                       // 'serverCertificate': '''
                       //          COPY VALID KUBERNETES CERTIFICATE HERE:
                       //              ''',

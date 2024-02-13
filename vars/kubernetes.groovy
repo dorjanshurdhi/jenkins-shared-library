@@ -16,7 +16,7 @@ def call(Map<String, Object> configMap) {
     // Verifica se il plugin è installato
     if (kubernetesPlugin != null) {
         // Verifica se esiste già un cloud Kubernetes con lo stesso nome
-        def kubernetesName = configMap['kubernetes-partner-name']
+        def kubernetesName = configMap['kubernetesPartnerName']
         def existingCloud = jenkinsInstance.clouds.find { cloud ->
          cloud instanceof org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud && cloud.name == kubernetesName
         }
@@ -30,7 +30,7 @@ def call(Map<String, Object> configMap) {
         }
 
         // Imposta la configurazione del plugin Kubernetes
-        def cloud = new KubernetesCloud(configMap['kubernetes-partner-name'])
+        def cloud = new KubernetesCloud(configMap['kubernetesPartnerName'])
         cloud.setServerUrl(configMap['serverUrl'])
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
@@ -41,7 +41,7 @@ def call(Map<String, Object> configMap) {
         //cloud.setConnectionTimeout(30000)
         //cloud.setReadTimeout(configMap['readTimeout'])
         //cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
-        cloud.setLabels(configMap['podLabels'])
+        cloud.setPodLabels(configMap['podLabels'])
 
         // Ottieni le credenziali dall'archivio di Jenkins
       ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
