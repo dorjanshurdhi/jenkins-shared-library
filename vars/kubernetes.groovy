@@ -72,36 +72,26 @@ def call(Map<String, Object> configMap) {
             
             // Configura il container nel podTemplate
             def containerData = podTemplateData['container']
-
-
-            println "eccomi " +containerData+ "\n"
-            println "name " +containerData['name']+ "\n"
-            println "image " +containerData['image']+ "\n"
-            println "alwaysPullImage " +containerData['alwaysPullImage']+ "\n"
-            println "privileged " +containerData['privileged']+ "\n"
-            println "workingDir " +containerData['workingDir']+ "\n"
-
-
             def container = new ContainerTemplate(
                 containerData['name'],
                 containerData['image']
             )
+            container.setAlwaysPullImage(containerData['alwaysPullImage'])
+            container.setPrivileged(containerData['privileged'])
+            container.setWorkingDir(containerData['workingDir'])
 
-            container.setAlwaysPullImage(true)
-            //container.setWorkingDir​(containerData['workingDir'])
-
-            //container.setArgs​(String args)
-            //container.setCommand​(String command)
-            //container.setResourceRequestCpu​(String resourceRequestCpu)
-            //container.setResourceRequestMemory​(String resourceRequestMemory)
-            //container.setResourceLimitCpu​(String resourceLimitCpu)
-            //container.setResourceLimitMemory​(String resourceLimitMemory)
-            //container.setResourceRequestEphemeralStorage​(String resourceRequestEphemeralStorage)
-            //container.setRunAsGroup​(String runAsGroup)
-            //container.setRunAsUser​(String runAsUser)
-            //container.setShell​(String shell)
-            //container.setTtyEnabled​(boolean ttyEnabled)
-            //container.setEnvVars​(List<TemplateEnvVar> envVars)
+            //container.setArgs(String args)
+            //container.setCommand(String command)
+            //container.setResourceRequestCpu(String resourceRequestCpu)
+            //container.setResourceRequestMemory(String resourceRequestMemory)
+            //container.setResourceLimitCpu(String resourceLimitCpu)
+            //container.setResourceLimitMemory(String resourceLimitMemory)
+            //container.setResourceRequestEphemeralStorage(String resourceRequestEphemeralStorage)
+            //container.setRunAsGroup(String runAsGroup)
+            //container.setRunAsUser(String runAsUser)
+            //container.setShell(String shell)
+            //container.setTtyEnabled(boolean ttyEnabled)
+            //container.setEnvVars(List<TemplateEnvVar> envVars)
 
 
             //    // Monta il persistent volume claim nel container
