@@ -74,7 +74,9 @@ def call(Map<String, Object> configMap) {
             def containerData = podTemplateData['container']
 
 
-            print "eccomi" +containerData
+            println "eccomi " +containerData
+            println "name " +containerData['name']
+            println "image " +containerData['image']
            // def container = new ContainerTemplate(
            //     name: containerData['name'],
             //    image: containerData['image']//,
