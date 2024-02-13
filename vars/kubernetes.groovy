@@ -48,10 +48,7 @@ def call(Map<String, Object> configMap) {
         def label2 = new PodLabel('jenkins', 'agent')
         podLabels.add(label1)
         podLabels.add(label2)
-        
-        // Ora puoi passare la lista di podLabels al metodo setPodLabels
         cloud.setPodLabels(podLabels)
-        //cloud.setPodLabels(labels)
 
         // Ottieni le credenziali dall'archivio di Jenkins
       ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
@@ -70,7 +67,48 @@ def call(Map<String, Object> configMap) {
             podTemplate.setLabel(podTemplateData['label'])
             podTemplate.setName(podTemplateData['name'])
             podTemplate.setNamespace(podTemplateData['namespace'])
-            // Altre configurazioni di PodTemplate...
+            //podTemplate.setNodeSelector(podTemplateData['nodeSelector'])
+            //podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
+            
+            // Configura il container nel podTemplate
+            def containerData = podTemplateData['container']
+            def container = new ContainerTemplate(
+                name: containerData['name'],
+                image: containerData['image']//,
+            //    command: containerData['command'],
+            //    args: containerData['args'],
+            //    resourceRequestCpu: containerData['resourceRequestCpu'],
+            //    resourceRequestMemory: containerData['resourceRequestMemory'],
+            //    resourceLimitCpu: containerData['resourceLimitCpu'],
+            //    resourceLimitMemory: containerData['resourceLimitMemory'],
+            //    alwaysPullImage: containerData['alwaysPullImage'] as boolean,
+            //    workingDir: containerData['workingDir'],
+            //    envVars: containerData['envVars'] as List<Map<String, String>>,
+            //    ports: containerData['ports'] as List<Map<String, Integer>>,
+            //    ttyEnabled: containerData['ttyEnabled'] as boolean,
+            //    privileged: containerData['privileged'] as boolean,
+            //    securityContext: containerData['securityContext'] as Map<String, Object>,
+            //    // Monta il persistent volume claim nel container
+            //    volumeMounts: [
+            //        [
+            //            name: podTemplateData['volume'].name,
+            //            mountPath: podTemplateData['volume'].mountPath
+            //        ]
+            //    ]
+            )
+            podTemplate.getContainers().add(container)
+
+            // Definisci il persistent volume claim nel podTemplate
+           //podTemplate.setVolumes([
+           //    [
+           //        name: podTemplateData['volume'].name,
+           //        persistentVolumeClaim: [
+           //            claimName: podTemplateData['volume'].persistentVolumeClaim.claimName
+           //        ]
+           //    ]
+           //])
+
+
             cloud.setTemplates([podTemplate])
         }
 

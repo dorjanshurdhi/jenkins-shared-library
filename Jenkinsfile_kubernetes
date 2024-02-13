@@ -22,17 +22,15 @@ pipeline{
                        'setSkipTlsVerify': false,
                        'jenkinsURL': "${params.jenkinsURL}",
                        'jenkinsTunnel': "${params.jenkinsTunnel}",
-                       //'podLabels': [['jenkins':'slave'],['jenkins':'agent']],
                        'podTemplate': [
                            'label': 'kubeagent',
                            'name': 'kube-agent',
-                           'namespace': 'devops-tools'
+                           'namespace': 'devops-tools',
+                            container: [ // Correzione da 'containers' a 'container'
+                                name: 'jnlp',
+                                image: 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0'
+                            ]
                         ]
-                    ]
-                    def podLabels = [
-                           ['jenkins': 'slave'],
-                           ['jenkins': 'agent'],
-                           ['japp.kubernetes.io/managed-by': 'jenkins']
                     ]
                     kubernetes(configMap)                
                 }
