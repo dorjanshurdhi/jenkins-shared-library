@@ -22,8 +22,7 @@ pipeline{
                             'namespace': 'devops-tools',
                      //       'nodeSelector': 'my-node-selector',
                      //       'instanceCap': 10,
-                            'containers': [
-                                [
+                            'container': [
                                     'name': 'jnlp',
                                     'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
                      //               'command': 'my-container-command',
@@ -47,7 +46,6 @@ pipeline{
                      //                   'runAsGroup': 1000,
                       //                  'fsGroup': 2000
                        //            ] 
-                                ]
                             ]//,
                        //     'volumes': [
                        //         ['type': 'HostPathVolume', 'mountPath': '/host/path', 'hostPath': '/path/on/host'],
@@ -62,7 +60,7 @@ pipeline{
                         ]
                     ]
     
-                     configureKubernetesPlugin(configMap)
+                    configureKubernetesPlugin(configMap)
                 }
             }
         }

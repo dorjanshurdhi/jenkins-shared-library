@@ -41,9 +41,8 @@ def call(Map<String, Object> configMap) {
             //podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
             
             // Configura i containers
-            def containers = podTemplateData['containers'] as List<Map<String, Object>>
-            containers.each { containerData ->
-            println("Container name: ${containerData['name']}")
+            // Configura il container nel podTemplate
+            def containerData = podTemplateData['container']
                 def container = new ContainerTemplate(
                     name: containerData['name'],
                     image: containerData['image'],
