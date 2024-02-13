@@ -27,7 +27,7 @@ def call(Map<String, String> configMap) {
       ////      return
       ////  }
 
-        cloud.setCredentialsId(credentials.id)
+      //  cloud.setCredentialsId(credentials.id)
 
         // Configura podTemplate se presente nei dati
         if (configMap.containsKey('podTemplate')) {
