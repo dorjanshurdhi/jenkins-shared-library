@@ -4,7 +4,6 @@ import hudson.slaves.*
 import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
-import io.fabric8.kubernetes.api.model.EnvVar;
 
 def call(Map<String, Object> configMap) {
     // Ottieni l'istanza di Jenkins
@@ -94,43 +93,19 @@ def call(Map<String, Object> configMap) {
             //container.setShell(String shell)
             //container.setEnvVars(List<TemplateEnvVar> envVars)
             // Creare una lista di oggetti TemplateEnvVar
-            def envVars = []
-            def envVar1 = new TemplateEnvVar("ENV_VARIABLE_1")
-            def envVar2 = new TemplateEnvVar("ENV_VARIABLE_2")
-            envVars.add(envVar1)
-            envVars.add(envVar2)
-            container.setEnvVars(envVars)
-
-            //    // Monta il persistent volume claim nel container
-            //    volumeMounts: [
-            //        [
-            //            name: podTemplateData['volume'].name,
-            //            mountPath: podTemplateData['volume'].mountPath
-            //        ]
-            //    ]
             
-           podTemplate.getContainers().add(container)
-
-            // Definisci il persistent volume claim nel podTemplate
-           //podTemplate.setVolumes([
-           //    [
-           //        name: podTemplateData['volume'].name,
-           //        persistentVolumeClaim: [
-           //            claimName: podTemplateData['volume'].persistentVolumeClaim.claimName
-           //        ]
-           //    ]
-           //])
-
-
+            podTemplate.getContainers().add(container)
             cloud.setTemplates([podTemplate])
         }
 
         // Aggiungi o aggiorna il cloud Kubernetes alla configurazione globale di Jenkins
+        // Per permettere di fare modifiche al cluter già configurato scommettantare il codice sotto e commentare il
+        // check dallaa riga 26-31
         def clouds = jenkinsInstance.clouds
         //boolean found = false
         //for (c in clouds) {
         //    if (c instanceof KubernetesCloud) {
-        //        if (c.name.equals(configMap['kubernetes-partner-name'])) {
+        //        if (c.name.equals(configMap['kubernetesPartnerName'])) {
         //            clouds.remove(c)
         //            clouds.add(cloud)
         //            found = true
@@ -144,7 +119,7 @@ def call(Map<String, Object> configMap) {
         clouds.add(cloud)
 
         // Salva le modifiche alla configurazione globale di Jenkins
-        //jenkinsInstance.clouds = clouds
+        jenkinsInstance.clouds = clouds
         jenkinsInstance.save()
         
         println("Plugin Kubernetes configurato con successo!")
