@@ -52,23 +52,13 @@ def call(Map<String, Object> configMap) {
         podLabels.add(label2)
         cloud.setPodLabels(podLabels)
 
-        def credentials = null
-        def jobName = env.JOB_NAME 
-        def credsList = CredentialsProvider.lookupCredentials(
-            StandardUsernamePasswordCredentials.class,
-            Jenkins.getInstanceOrNull(),
-            'kubernetes-id',
-            (List<Domain>) null
-        )
-        credentials = credsList.find {
-            it.id == "kubernetes-id" // Componi l'ID delle credenziali utilizzando il nome del job
-        }
-        if (credentials == null) {
-            println("Credenziali non trovate per l'ID specificato")
+        //Verifica la presenza del CredentialsId su jenkins
+        if (credentialsExist) {
+            cloud.setCredentialsId(credentials.id)
         } else {
-            println("Credenziali trovate: ${credentials}")
+            println("Le credenziali con ID $credentialsId non esistono su Jenkins")
+            return
         }
-        cloud.setCredentialsId(credentials.id)
 
         // Configura podTemplate se presente nei dati
         if (configMap.containsKey('podTemplate')) {
@@ -135,4 +125,33 @@ def call(Map<String, Object> configMap) {
     } else {
         println("Il plugin Kubernetes non è installato.")
     }
+}
+
+
+// Metodo per verificare l'esistenza di un credentialsId su Jenkins
+def checkCredentialsExistence(String credentialsId) {
+    // Otteniamo l'istanza di Jenkins
+    def jenkinsInstance = Jenkins.getInstanceOrNull()
+    
+    if (jenkinsInstance == null) {
+        println("Jenkins non è inizializzato correttamente")
+        return false
+    }
+    
+    // Otteniamo tutte le credenziali di tipo StandardCredentials
+    def credentialsList = CredentialsProvider.lookupCredentials(
+        StandardCredentials.class,
+        jenkinsInstance,
+        null,
+        null
+    )
+    
+    // Verifichiamo se il credentialsId è presente nella lista delle credenziali
+    def credentialsExist = CredentialsMatchers.firstOrNull(
+        credentialsList,
+        CredentialsMatchers.withId(credentialsId)
+    ) != null
+    
+    
+    return credentialsExist
 }
