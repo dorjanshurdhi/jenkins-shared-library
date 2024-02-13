@@ -31,7 +31,8 @@ pipeline{
                     ]
                     def podLabels = [
                            ['jenkins': 'slave'],
-                           ['jenkins': 'agent']
+                           ['jenkins': 'agent'],
+                           ['japp.kubernetes.io/managed-by': 'jenkins']
                     ]
                     kubernetes(configMap,podLabels)                
                 }
