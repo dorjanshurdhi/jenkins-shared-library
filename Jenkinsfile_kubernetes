@@ -12,7 +12,7 @@ pipeline{
                 script {
                     def configMap = [
                        'kubernetes-partner-name':"${params.kubernetesPartnerName}",
-                       'kubeconfig': '''
+                       'kubeconfig': '
                                         apiVersion: v1
                                         clusters:
                                         - cluster:
@@ -30,7 +30,7 @@ pipeline{
                                         - name: kubernetes-admin
                                           user:
                                             client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJVekNDQWRnd0RRWUpLb1pJaHZjTkFRRUxCUUF3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2FHTkJRVUpCZG1FV1N6RUxNQWtHQTFVRUJ3d0pWVEVUTUJFR0ExVUVDQXdLVTJGSE1GVXhHakFZQmdOVgpIUmxjbTVsZG1WeWJtVjBPakUyTURjeE5ERXhOakV5T1RnMU9UQXpNamd3TXpBd01Wb1hEVEk0TVRrd09ETXpNakVnCmJXbHVRR2R0YzJWamRHVnlhV05oZEdVeEZ6QVZCZ05WQkFzTURYTnBkR1Z0Y0d4bExtTnZiU0J2WVhScGIyNWhibVYwTkRBeU1qRXcKTVI0d0hBWURWUVFERXdkbGVXeHZjMlV4RmpBVUJnTlZCQU1NQ0VOdmJXbHVRR2R0YzJWamRHVnlhV05oZEdVagpORFV3TWpBeE56SXpXakExTURFME1qTXhOamN6TlRNM09EWXhOVE0wTXpNek5qY3pOVE0zT0RFeE5ETTBNek16Ck5qY3pOVE0zT0RFek56STNNekV6TURnME1USXpNelF4TmpJeE5qRTRNVFl3TXpFeUxURXpNekF5TlRFd01EY3gKem1PRFFWQ0NBUW9DZ2dFQkFJd0FEQWRCZ05WSFE0RUZnUVVrRk1BMEdDU3FHU0liM0RRRUJBUVVBQTRHTkFEQ0JpCkFRSC9VUDZVYUNkQk9pditEK2dJZ1F2b0hPbDJYV05kamhjMmlnNnp1Y3JLMzhNS0RkV2ozNlpKVjBBSUNnWUVBZ0VJRUoKQlFrTUJNUXhHQTFVRUNoTVVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdZMEFNSUdKQW9HQkFMQwpjbVFnUkRFZU1CTUdBMVVFQ0JNS1VWTXhGakVXSGhjTk1UY3hNRGc0TlRFMU5Ea3lOREV4TkRBeU1qVXhNREUyCmJ5WXdPakVMTUFrR0ExVUVCaE1DVlZNeEZqRVVIbG9HU0liM0RRRUJBUVVBQTRHTkFEQ0JpQUdLQm9hb1kKbERUdmd3U3lGbXpVMXZ5YlU4eWtXTmlFWnNDTnQyVzdDQmVBK1J1TGxxM1pEU1pPNktwV3Y4cWJvS1doTkp3egoyMXQzU1U2Z1dXdENPQVY5U3ZxZ0VwRWdEaE9XcjNLdUZKTWprK1N3NzQrZldKYWllMmNidE5OemVSTWY0Y0RwCkZlSjhqSTUrNkZod3V0UGgzOTVncGRydlAyR2V6cXJrQzFESFZ4Q0dRQVY3OUc3WFlDdGpCN1pSWUp5bVlOS0MKU0lpOUpHaGhPd3kxY1F3WDIvV1RlNWd6T2FXOHRkQTFsV1c3Rnl5YzcyWXhOQ2tGejNQclRiVElMUWpkRQpHZXhPNEtOcXJLN1E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-                                    ''',
+                                    ',
                        'serverUrl': "${params.serverUrl}",
                        'namespace': "${params.namespace}",
                        'credentialsId': "${params.credentialsId}",
