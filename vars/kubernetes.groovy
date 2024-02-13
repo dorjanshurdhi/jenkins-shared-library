@@ -79,8 +79,8 @@ def call(Map<String, Object> configMap) {
             container.setAlwaysPullImage(containerData['alwaysPullImage'])
             container.setPrivileged(containerData['privileged'])
             container.setWorkingDir(containerData['workingDir'])
-            container.setCommand(containerData['command'])
-            container.setArgs(containerData['args'])
+            //container.setCommand(containerData['command'])
+            //container.setArgs(containerData['args'])
             container.setTtyEnabled(containerData['ttyEnabled'])
             
             //container.setResourceRequestCpu(String resourceRequestCpu)
