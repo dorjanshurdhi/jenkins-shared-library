@@ -11,7 +11,7 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name':$kubernetesPartnerName,
+                       'kubernetes-partner-name':${kubernetesPartnerName},
                        'serverUrl': $serverUrl,
                        'namespace': $namespace,
                        'credentialsId': $credentialsId,
