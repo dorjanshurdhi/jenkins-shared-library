@@ -37,8 +37,21 @@ pipeline{
                                 'ttyEnabled': true,
                                 'envVars': [
                                     ['key': 'MY_ENV_VAR', 'value': 'my-value']
+                                ],
+                                volumeMounts: [
+                                    [
+                                        name: 'jenkins-agent',
+                                        mountPath: '/tmp'
+                                    ]
+                                ]
+                            ],
+                           volume: [
+                                name: 'jenkins-agent',
+                                persistentVolumeClaim: [
+                                    claimName: 'jenkins-agent'
                                 ]
                             ]
+
                         ]
                     ]
                     kubernetes(configMap)                
