@@ -23,25 +23,10 @@ def call(Map<String, Object> configMap) {
 
         // Se esiste già un cloud Kubernetes con lo stesso nome, stampa un messaggio e interrompi lo script
         if (existingCloud) {
-
-             // Define Variable
-             def USER_INPUT = input(
-                    message: 'Questo Cloud è già configurato, vuoi procedere comunque?',
-                    parameters: [
-                            [$class: 'ChoiceParameterDefinition',
-                             choices: ['NO','SI'].join('\n'),
-                             name: 'input',
-                             description: 'Menu - select box option']
-                    ])
-
-            echo "The answer is: ${USER_INPUT}"
-
-            if( "${USER_INPUT}" == "NO"){
-                println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
-                currentBuild.result = 'UNSTABLE'
-                unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
-                return
-            }  
+            println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
+            currentBuild.result = 'UNSTABLE'
+            unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
+            return
         }
 
         // Imposta la configurazione del plugin Kubernetes
@@ -49,7 +34,7 @@ def call(Map<String, Object> configMap) {
         cloud.setServerUrl(configMap['serverUrl'])
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
-        //cloud.setServerCertificate(configMap['serverCertificate'])
+        cloud.setServerCertificate(configMap['serverCertificate'])
         //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
