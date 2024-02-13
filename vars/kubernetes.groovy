@@ -22,7 +22,7 @@ def call(Map<String, String> configMap) {
         //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
-        cloud.setConnectionTimeout(configMap['connectionTimeout'])
+        cloud.setConnectionTimeout(30000)
         cloud.setReadTimeout(configMap['readTimeout'])
         cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
         cloud.setPodLabels(configMap['podLabels'])
