@@ -79,9 +79,9 @@ def call(Map<String, Object> configMap) {
             container.setAlwaysPullImage(containerData['alwaysPullImage'])
             container.setPrivileged(containerData['privileged'])
             container.setWorkingDir(containerData['workingDir'])
-
-            //container.setArgs(String args)
-            //container.setCommand(String command)
+            container.setCommand(containerData['command'])
+            container.setArgs(containerData['args'])
+            
             //container.setResourceRequestCpu(String resourceRequestCpu)
             //container.setResourceRequestMemory(String resourceRequestMemory)
             //container.setResourceLimitCpu(String resourceLimitCpu)

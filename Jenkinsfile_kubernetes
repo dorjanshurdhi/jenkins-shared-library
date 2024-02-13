@@ -31,7 +31,9 @@ pipeline{
                                 'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
                                 'alwaysPullImage': true,
                                 'privileged': true,
-                                'workingDir': 'home/jenkins/agent'
+                                'workingDir': 'home/jenkins/agent',
+                                'command': 'sleep',
+                                'args': 36000
                             ]
                         ]
                     ]
