@@ -26,7 +26,7 @@ pipeline{
                            'label': 'kubeagent',
                            'name': 'kube-agent',
                            'namespace': 'devops-tools',
-                           'container': [ 
+                           'container': [
                                 'name': 'jnlp',
                                 'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
                                 'alwaysPullImage': true,
