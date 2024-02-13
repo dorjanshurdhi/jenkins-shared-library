@@ -45,7 +45,7 @@ def call(Map<String, String> configMap) {
         boolean found = false
         for (c in clouds) {
             if (c instanceof KubernetesCloud) {
-                if (c.name.equals('kubernetes')) {
+                if (c.name.equals(configMap['kubernetes-partner-name'])) {
                     clouds.remove(c)
                     clouds.add(cloud)
                     found = true

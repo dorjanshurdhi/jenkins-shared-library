@@ -11,14 +11,14 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name':'partner-1',
+                       'kubernetes-partner-name':'partner-2',
                        'serverUrl': 'https://kubernetes.example.com',
-                       'namespace': 'my-namespace',
+                       'namespace': 'devops-tools',
                        'credentialsId': 'my-credentials-id',
                        'podTemplate': [
-                           'label': 'my-pod-label',
-                           'name': 'my-pod-name',
-                           'namespace': 'my-pod-namespace'
+                           'label': 'kubeagent',
+                           'name': 'kubeaagent',
+                           'namespace': 'devops-tools'
                         ]
                     ]
                     kubernetes(configMap)                
