@@ -78,8 +78,8 @@ def call(Map<String, Object> configMap) {
             println "name " +containerData['name']
             println "image " +containerData['image']
             def container = new ContainerTemplate(
-                name: containerData['name'],
-                image: containerData['image']
+                containerData['name'],
+                containerData['image']
             //    command: containerData['command'],
             //    args: containerData['args'],
             //    resourceRequestCpu: containerData['resourceRequestCpu'],
