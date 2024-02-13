@@ -101,7 +101,7 @@ def call(Map<String, Object> configMap) {
             //        ]
             //    ]
             //)
-            podTemplate.getContainers().add(container)
+           // podTemplate.getContainers().add(container)
 
             // Definisci il persistent volume claim nel podTemplate
            //podTemplate.setVolumes([
