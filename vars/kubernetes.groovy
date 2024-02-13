@@ -35,7 +35,7 @@ def call(Map<String, Object> configMap) {
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
         //cloud.setServerCertificate(configMap['serverCertificate'])
-        cloud.setCredentialsId(configMap['credentialsId'])
+        //cloud.setCredentialsId(configMap['credentialsId'])
         cloud.setSkipTlsVerify(configMap['skipTlsVerify'])
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
@@ -51,14 +51,12 @@ def call(Map<String, Object> configMap) {
         cloud.setPodLabels(podLabels)
 
         // Ottieni le credenziali dall'archivio di Jenkins
-      ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
-////
-      ////  if (credentials == null) {
-      ////      println("Le credenziali con ID ${configMap['credentialsId']} non sono state trovate.")
-      ////      return
-      ////  }
-
-      //  cloud.setCredentialsId(credentials.id)
+        def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
+        if (credentials == null) {
+            println("Le credenziali con ID ${configMap['credentialsId']} non sono state trovate.")
+            return
+        }
+        cloud.setCredentialsId(credentials.id)
 
         // Configura podTemplate se presente nei dati
         if (configMap.containsKey('podTemplate')) {
