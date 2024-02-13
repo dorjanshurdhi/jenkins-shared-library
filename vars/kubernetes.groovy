@@ -4,6 +4,7 @@ import hudson.slaves.*
 import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
+import io.fabric8.kubernetes.api.model.EnvVar;
 
 def call(Map<String, Object> configMap) {
     // Ottieni l'istanza di Jenkins
