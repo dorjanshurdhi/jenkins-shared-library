@@ -12,9 +12,9 @@ pipeline{
                 script {
                     def configMap = [
                        'kubernetes-partner-name':"${params.kubernetesPartnerName}",
-                       'serverCertificate': '''
-                                COPY VALID KUBERNETES CERTIFICATE HERE:
-                                    ''',
+                      // 'serverCertificate': '''
+                      //          COPY VALID KUBERNETES CERTIFICATE HERE:
+                      //              ''',
                        'serverUrl': "${params.serverUrl}",
                        'namespace': "${params.namespace}",
                        'credentialsId': "${params.credentialsId}",
@@ -27,7 +27,7 @@ pipeline{
                        'connectionTimeout': "${params.connectionTimeout}",
                        'readTimeout': "${params.readTimeout}",
                        'concurrencyLimit': "${params.concurrencyLimit}",
-                       'podLabels': ['jenkins': 'agent'],
+                       'podLabels': ['jenkins': 'agent','jenkins': 'agent1'],
                        'podTemplate': [
                            'label': 'kubeagent',
                            'name': 'kube-agent',
