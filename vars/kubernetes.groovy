@@ -1,9 +1,11 @@
 import jenkins.model.*
-import jenkins.model.Jenkins
 import hudson.slaves.*
 import org.csanchez.jenkins.plugins.kubernetes.*
+import com.cloudbees.plugins.credentials.CredentialsMatchers
 import com.cloudbees.plugins.credentials.CredentialsProvider
+import com.cloudbees.plugins.credentials.domains.Domain
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
+
 
 def call(Map<String, Object> configMap) {
     // Ottieni l'istanza di Jenkins
@@ -50,11 +52,21 @@ def call(Map<String, Object> configMap) {
         podLabels.add(label2)
         cloud.setPodLabels(podLabels)
 
-        // Ottieni le credenziali dall'archivio di Jenkins
-        def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
+        def credentials = null
+        def jobName = env.JOB_NAME // Ottieni il nome del job corrente
+        def credsList = CredentialsProvider.lookupCredentials(
+            StandardUsernamePasswordCredentials.class,
+            Jenkins.getInstanceOrNull(),
+            null,
+            (List<Domain>) null
+        )
+        credentials = credsList.find {
+            it.id == "kubernetes-id" // Componi l'ID delle credenziali utilizzando il nome del job
+        }
         if (credentials == null) {
-            println("Le credenziali con ID ${configMap['credentialsId']} non sono state trovate.")
-            return
+            println("Credenziali non trovate per l'ID specificato")
+        } else {
+            println("Credenziali trovate: ${credentials}")
         }
         cloud.setCredentialsId(credentials.id)
 
