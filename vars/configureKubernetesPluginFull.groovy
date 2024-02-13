@@ -39,47 +39,38 @@ def call(Map<String, Object> configMap) {
             podTemplate.setNamespace(podTemplateData['namespace'])
             podTemplate.setNodeSelector(podTemplateData['nodeSelector'])
             podTemplate.setInstanceCap(podTemplateData['instanceCap'] as int)
-            
-            // Configura i containers
-             def containerData = podTemplateData['container']
-                def container = new ContainerTemplate(
-                    name: containerData['name'],
-                    image: containerData['image'],
-                    command: containerData['command'],
-                    args: containerData['args'],
-                    resourceRequestCpu: containerData['resourceRequestCpu'],
-                    resourceRequestMemory: containerData['resourceRequestMemory'],
-                    resourceLimitCpu: containerData['resourceLimitCpu'],
-                    resourceLimitMemory: containerData['resourceLimitMemory'],
-                    alwaysPullImage: containerData['alwaysPullImage'] as boolean,
-                    workingDir: containerData['workingDir'],
-                    envVars: containerData['envVars'] as List<Map<String, String>>,
-                    ports: containerData['ports'] as List<Map<String, Integer>>,
-                    ttyEnabled: containerData['ttyEnabled'] as boolean,
-                    privileged: containerData['privileged'] as boolean,
-                    securityContext: containerData['securityContext'] as Map<String, Object>
-                )
+
+            // Configura il container
+            def containerData = podTemplateData['container']
+            def container = new ContainerTemplate(
+                name: containerData['name'],
+                image: containerData['image'],
+                command: containerData['command'],
+                args: containerData['args'],
+                resourceRequestCpu: containerData['resourceRequestCpu'],
+                resourceRequestMemory: containerData['resourceRequestMemory'],
+                resourceLimitCpu: containerData['resourceLimitCpu'],
+                resourceLimitMemory: containerData['resourceLimitMemory'],
+                alwaysPullImage: containerData['alwaysPullImage'] as boolean,
+                workingDir: containerData['workingDir'],
+                envVars: containerData['envVars'] as List<Map<String, String>>,
+                ports: containerData['ports'] as List<Map<String, Integer>>,
+                ttyEnabled: containerData['ttyEnabled'] as boolean,
+                privileged: containerData['privileged'] as boolean,
+                securityContext: containerData['securityContext'] as Map<String, Object>
+            )
             podTemplate.getContainers().add(container)
 
-
-            // Configura i volumes
-            def volumes = podTemplateData['volumes'] as List<Map<String, String>>
-            volumes.each { volumeData ->
-                def volume
-                if (volumeData['type'] == 'HostPathVolume') {
-                    volume = new HostPathVolume(mountPath: volumeData['mountPath'], hostPath: volumeData['hostPath'])
-                } else {
-                    volume = new EmptyDirVolume(mountPath: volumeData['mountPath'])
-                }
-                podTemplate.getVolumes().add(volume)
+            // Configura il volume
+            def volumeData = podTemplateData['volumes'][0] // Prende il primo elemento della lista dei volumi
+            def volume
+            if (volumeData['type'] == 'HostPathVolume') {
+                volume = new HostPathVolume(mountPath: volumeData['mountPath'], hostPath: volumeData['hostPath'])
+            } else {
+                volume = new EmptyDirVolume(mountPath: volumeData['mountPath'])
             }
-            podTemplate.setServiceAccount(podTemplateData['serviceAccount'])
-            podTemplate.setAnnotations(podTemplateData['annotations'] as Map<String, String>)
-            podTemplate.setImagePullSecrets(podTemplateData['imagePullSecrets'] as List<String>)
-            podTemplate.setIdleMinutes(podTemplateData['idleMinutes'] as int)
-            podTemplate.setActiveDeadlineSeconds(podTemplateData['activeDeadlineSeconds'] as int)
-            podTemplate.setTimeoutSeconds(podTemplateData['timeoutSeconds'] as int)
-            
+            podTemplate.getVolumes().add(volume)
+
             cloud.setTemplates([podTemplate])
         }
 
