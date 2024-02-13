@@ -25,6 +25,7 @@ def call(Map<String, Object> configMap) {
         if (existingCloud) {
             println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
             currentBuild.result = 'UNSTABLE'
+            unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
             return
         }
 
