@@ -34,7 +34,7 @@ pipeline{
                                 'workingDir': 'home/jenkins/agent',
                                 'command': 'sleep',
                                 'args': '36000',
-                                'ttyEnabled': true',
+                                'ttyEnabled': true,
                                 'envVars': [
                                     ['key': 'MY_ENV_VAR', 'value': 'my-value']
                                 ]
