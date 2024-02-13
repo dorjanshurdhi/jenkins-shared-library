@@ -61,6 +61,7 @@ def call(Map<String, Object> configMap) {
                     //securityContext: containerData['securityContext'] as Map<String, Object>
                 )
                 podTemplate.getContainers().add(container)
+                cloud.setTemplates([podTemplate])
             }
 
       ////      // Configura i volumes
@@ -82,8 +83,7 @@ def call(Map<String, Object> configMap) {
       ////      podTemplate.setActiveDeadlineSeconds(podTemplateData['activeDeadlineSeconds'] as int)
       ////      podTemplate.setTimeoutSeconds(podTemplateData['timeoutSeconds'] as int)
             
-            cloud.setTemplates([podTemplate])
-        }
+            
 
         // Aggiungi o aggiorna il cloud Kubernetes alla configurazione globale di Jenkins
         def clouds = jenkinsInstance.clouds

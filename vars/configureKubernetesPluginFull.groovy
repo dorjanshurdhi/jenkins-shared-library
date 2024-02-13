@@ -103,7 +103,7 @@ def call(Map<String, Object> configMap) {
         jenkinsInstance.save()
         
         println("Plugin Kubernetes configurato con successo!")
-    } else {
-        println("Il plugin Kubernetes non è installato.")
-    }
+        } else {
+            println("Il plugin Kubernetes non è installato.")
+        }
 }
