@@ -66,20 +66,21 @@ def call(Map<String, Object> configMap) {
 
         // Aggiungi o aggiorna il cloud Kubernetes alla configurazione globale di Jenkins
         def clouds = jenkinsInstance.clouds
-        boolean found = false
-        for (c in clouds) {
-            if (c instanceof KubernetesCloud) {
-                if (c.name.equals(configMap['kubernetes-partner-name'])) {
-                    clouds.remove(c)
-                    clouds.add(cloud)
-                    found = true
-                    break
-                }
-            }
-        }
-        if (!found) {
-            clouds.add(cloud)
-        }
+        //boolean found = false
+        //for (c in clouds) {
+        //    if (c instanceof KubernetesCloud) {
+        //        if (c.name.equals(configMap['kubernetes-partner-name'])) {
+        //            clouds.remove(c)
+        //            clouds.add(cloud)
+        //            found = true
+        //            break
+        //        }
+        //    }
+        //}
+        //if (!found) {
+        //    clouds.add(cloud)
+        //}
+        clouds.add(cloud)
 
         // Salva le modifiche alla configurazione globale di Jenkins
         //jenkinsInstance.clouds = clouds
