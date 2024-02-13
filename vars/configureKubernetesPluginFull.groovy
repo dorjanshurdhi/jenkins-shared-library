@@ -1,7 +1,7 @@
 import jenkins.model.*
 import jenkins.model.Jenkins
 import hudson.slaves.*
-import java.util.Collections
+import java.util.Collections.*
 import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
@@ -43,7 +43,7 @@ def call(Map<String, Object> configMap) {
             // Configura i containers
             def containers = podTemplateData['containers'] as List<Map<String, Object>>
             containers.each { containerData ->
-            println("Container name: ${containerData['name']}")
+            //println("Container name: ${containerData['name']}")
                 def container = new ContainerTemplate(
                     name: containerData['name'],
                     image: containerData['image'],
