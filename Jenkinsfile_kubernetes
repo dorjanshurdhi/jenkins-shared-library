@@ -26,9 +26,9 @@ pipeline{
                            'label': 'kubeagent',
                            'name': 'kube-agent',
                            'namespace': 'devops-tools',
-                            container: [ // Correzione da 'containers' a 'container'
-                                name: 'jnlp',
-                                image: 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0'
+                           'container': [ 
+                                'name': 'jnlp',
+                                'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0'
                             ]
                         ]
                     ]
