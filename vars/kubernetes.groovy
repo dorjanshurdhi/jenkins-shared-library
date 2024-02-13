@@ -82,7 +82,6 @@ def call(Map<String, Object> configMap) {
             //container.setCommand(containerData['command'])
             //container.setArgs(containerData['args'])
             container.setTtyEnabled(containerData['ttyEnabled'])
-            
             //container.setResourceRequestCpu(String resourceRequestCpu)
             //container.setResourceRequestMemory(String resourceRequestMemory)
             //container.setResourceLimitCpu(String resourceLimitCpu)
@@ -91,11 +90,10 @@ def call(Map<String, Object> configMap) {
             //container.setRunAsGroup(String runAsGroup)
             //container.setRunAsUser(String runAsUser)
             //container.setShell(String shell)
-            
-            //container.setEnvVars(List<TemplateEnvVar> envVars)
+            container.setEnvVars(containerData['envVars'])
 
 
-            //    // Monta il persistent volume claim nel container
+            // Monta il persistent volume claim nel container
             //    volumeMounts: [
             //        [
             //            name: podTemplateData['volume'].name,
