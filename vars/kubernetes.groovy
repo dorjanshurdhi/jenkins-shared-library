@@ -24,8 +24,8 @@ def call(Map<String, Object> configMap) {
         // Se esiste già un cloud Kubernetes con lo stesso nome, stampa un messaggio e interrompi lo script
         if (existingCloud) {
             println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
-            currentBuild.result = 'UNSTABLE'
             unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
+            currentBuild.result = 'UNSTABLE'
             return
         }
 
