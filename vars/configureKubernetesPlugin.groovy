@@ -1,6 +1,7 @@
 import jenkins.model.*
 import jenkins.model.Jenkins
 import hudson.slaves.*
+import java.util.Collections
 import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials

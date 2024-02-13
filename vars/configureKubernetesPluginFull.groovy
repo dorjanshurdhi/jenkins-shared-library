@@ -1,6 +1,7 @@
 import jenkins.model.*
 import jenkins.model.Jenkins
 import hudson.slaves.*
+import java.util.Collections
 import org.csanchez.jenkins.plugins.kubernetes.*
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials
@@ -63,7 +64,7 @@ def call(Map<String, Object> configMap) {
                 podTemplate.getContainers().add(container)
             }
 
-      //      // Configura i volumes
+            // Configura i volumes
             def volumes = podTemplateData['volumes'] as List<Map<String, String>>
             volumes.each { volumeData ->
                 def volume
