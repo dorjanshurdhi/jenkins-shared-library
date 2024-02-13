@@ -22,9 +22,9 @@ pipeline{
                        //'disableHTTPCertificateCheck': false,
                        'jenkinsURL': "${params.jenkinsURL}",
                        'jenkinsTunnel': "${params.jenkinsTunnel}",
-                       'connectionTimeout': 50,
-                       'readTimeout': 15,
-                       'concurrencyLimit': 10,
+                       'connectionTimeout': '50',
+                       'readTimeout': '15',
+                       'concurrencyLimit': '10',
                        'podLabels': ['jenkins':'agent','owner':'partner-3'],
                        'podTemplate': [
                            'label': 'kubeagent',
