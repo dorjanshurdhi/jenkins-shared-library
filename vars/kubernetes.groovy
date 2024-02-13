@@ -18,6 +18,14 @@ def call(Map<String, String> configMap) {
         def cloud = new KubernetesCloud(configMap['kubernetes-partner-name'])
         cloud.setServerUrl(configMap['serverUrl'])
         cloud.setNamespace(configMap['namespace'])
+        cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
+        cloud.setDisableHTTPCertificateCheck(configMap['disableHTTPCertificateCheck'])
+        cloud.setJenkinsURL(configMap['jenkinsURL'])
+        cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
+        cloud.setConnectionTimeout(configMap['connectionTimeout'])
+        cloud.setReadTimeout(configMap['readTimeout'])
+        cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
+        cloud.setPodLabels(configMap['podLabels'])
 
         // Ottieni le credenziali dall'archivio di Jenkins
       ////  def credentials = CredentialsProvider.findCredentialById(configMap['credentialsId'], StandardUsernamePasswordCredentials.class, Jenkins.getInstance(), Collections.emptyList())
