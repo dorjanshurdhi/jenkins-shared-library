@@ -11,17 +11,17 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name':${params.kubernetesPartnerName},
-                       'serverUrl': ${params.serverUrle},
-                       'namespace': ${params.namespacee},
-                       'credentialsId': ${params.credentialsIde},
-                       'useJenkinsProxy': ${params.useJenkinsProxye},
-                       'disableHTTPCertificateCheck': ${params.disableHTTPCertificateChecke},
-                       'jenkinsURL': ${params.jenkinsURLe},
-                       'jenkinsTunnel': ${params.jenkinsTunnele},
-                       'connectionTimeout': ${params.connectionTimeoute},
-                       'readTimeout': ${params.readTimeoute},
-                       'concurrencyLimit': ${params.concurrencyLimite},
+                       'kubernetes-partner-name':"${params.kubernetesPartnerName}",
+                       'serverUrl': "${params.serverUrl}",
+                       'namespace': "${params.namespace}",
+                       'credentialsId': "${params.credentialsId}",
+                       'useJenkinsProxy': "${params.useJenkinsProxy}",
+                       'disableHTTPCertificateCheck': "${params.disableHTTPCertificateCheck}",
+                       'jenkinsURL': "${params.jenkinsURL}",
+                       'jenkinsTunnel': "${params.jenkinsTunnel}",
+                       'connectionTimeout': "${params.connectionTimeout}",
+                       'readTimeout': "${params.readTimeout}",
+                       'concurrencyLimit': "${params.concurrencyLimit}",
                        'podLabels': ['jenkins': 'agent', 'owner': 'partner-3'],
                        'podTemplate': [
                            'label': 'kubeagent',
