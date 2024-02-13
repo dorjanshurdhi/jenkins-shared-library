@@ -30,7 +30,7 @@ def call(Map<String, Object> configMap) {
              ])
 
             println(userInput); //Use this value to branch to different logic if needed
-            if(userInput.equals"NO") {
+            if(userInput.equals("NO")) {
                 println "Il cloud Kubernetes '${kubernetesName}' è già configurato."
                 currentBuild.result = 'UNSTABLE'
                 unstable(message: "Il cloud Kubernetes '${kubernetesName}' è già configurato.")
