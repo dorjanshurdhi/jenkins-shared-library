@@ -37,7 +37,7 @@ def call(Map<String, Object> configMap) {
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
         //cloud.setServerCertificate(configMap['serverCertificate'])
-        //cloud.setCredentialsId(configMap['credentialsId'])
+        cloud.setCredentialsId(configMap['credentialsId'])
         cloud.setSkipTlsVerify(configMap['skipTlsVerify'])
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
@@ -51,15 +51,6 @@ def call(Map<String, Object> configMap) {
         podLabels.add(label1)
         podLabels.add(label2)
         cloud.setPodLabels(podLabels)
-
-        //Verifica la presenza del CredentialsId su jenkins
-        def exist = checkCredentialsExistence("kubernetes-id")
-        if (exist) {
-            cloud.setCredentialsId("kubernetes-id")
-        } else {
-            println("Le credenziali con ID $credentialsId non esistono su Jenkins")
-            return
-        }
 
         // Configura podTemplate se presente nei dati
         if (configMap.containsKey('podTemplate')) {
@@ -126,31 +117,4 @@ def call(Map<String, Object> configMap) {
     } else {
         println("Il plugin Kubernetes non è installato.")
     }
-}
-
-
-// Metodo per verificare l'esistenza di un credentialsId su Jenkins
-def checkCredentialsExistence(String credentialsId) {
-    // Otteniamo l'istanza di Jenkins
-    def jenkinsInstance = Jenkins.getInstanceOrNull()
-    
-    if (jenkinsInstance == null) {
-        println("Jenkins non è inizializzato correttamente")
-        return false
-    }
-    // Otteniamo tutte le credenziali di tipo StandardCredentials
-    def credentialsList = CredentialsProvider.lookupCredentials(
-        StandardCredentials.class,
-        jenkinsInstance,
-        null,
-        null
-    )
-    // Verifichiamo se il credentialsId è presente nella lista delle credenziali
-    def credentialsExist = CredentialsMatchers.firstOrNull(
-        credentialsList,
-        CredentialsMatchers.withId(credentialsId)
-    ) != null
-    
-    println "pippo: " +credentialsExist
-    return credentialsExist
 }
