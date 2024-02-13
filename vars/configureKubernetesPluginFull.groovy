@@ -62,7 +62,7 @@ def call(Map<String, Object> configMap) {
             podTemplate.getContainers().add(container)
 
             // Configura il volume
-            def volumeData = podTemplateData['volumes'][0] // Prende il primo elemento della lista dei volumi
+            def volumeData = podTemplateData['volume']
             def volume
             if (volumeData['type'] == 'HostPathVolume') {
                 volume = new HostPathVolume(mountPath: volumeData['mountPath'], hostPath: volumeData['hostPath'])
