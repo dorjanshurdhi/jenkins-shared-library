@@ -11,17 +11,17 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name':'partner-3',
-                       'serverUrl': 'https://kubernetes.example.com',
-                       'namespace': 'devops-tools',
-                       'credentialsId': 'my-credentials-id',
-                       'useJenkinsProxy': true,
-                       'disableHTTPCertificateCheck': false,
-                       'jenkinsURL': 'http://jenkins.example.com',
-                       'jenkinsTunnel': 'jenkins-tunnel.example.com:50000',
-                       'connectionTimeout': 30000,
-                       'readTimeout': 60000,
-                       'concurrencyLimit': 10,
+                       'kubernetes-partner-name':${kubernetes-partner-name},
+                       'serverUrl': ${serverUrl},
+                       'namespace': ${namespace},
+                       'credentialsId': ${credentialsId},
+                       'useJenkinsProxy': ${useJenkinsProxy},
+                       'disableHTTPCertificateCheck': ${disableHTTPCertificateCheck},
+                       'jenkinsURL': ${jenkinsURL},
+                       'jenkinsTunnel': ${jenkinsTunnel},
+                       'connectionTimeout': ${connectionTimeout},
+                       'readTimeout': ${readTimeout},
+                       'concurrencyLimit': ${concurrencyLimit},
                        'podLabels': ['jenkins': 'agent', 'owner': 'partner-3'],
                        'podTemplate': [
                            'label': 'kubeagent',
