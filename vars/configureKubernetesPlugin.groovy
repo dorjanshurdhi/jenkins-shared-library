@@ -42,6 +42,7 @@ def call(Map<String, Object> configMap) {
             // Configura i containers
             def containers = podTemplateData['containers'] as List<Map<String, Object>>
             containers.each { containerData ->
+            println("Container name: ${containerData['name']}")
                 def container = new ContainerTemplate(
                     name: containerData['name'],
                     image: containerData['image'],
