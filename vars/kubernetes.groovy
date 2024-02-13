@@ -74,9 +74,14 @@ def call(Map<String, Object> configMap) {
             def containerData = podTemplateData['container']
 
 
-            println "eccomi " +containerData
-            println "name " +containerData['name']
-            println "image " +containerData['image']
+            println "eccomi " +containerData+ "\n"
+            println "name " +containerData['name']+ "\n"
+            println "image " +containerData['image']+ "\n"
+            println "alwaysPullImage " +containerData['alwaysPullImage']+ "\n"
+            println "privileged " +containerData['privileged']+ "\n"
+            println "workingDir " +containerData['workingDir']+ "\n"
+
+
             def container = new ContainerTemplate(
                 containerData['name'],
                 containerData['image']
