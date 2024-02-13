@@ -52,7 +52,7 @@ pipeline {
                                 //        name: 'jenkins-agent',
                                 //        mountPath: '/tmp'
                                 //    ]
-                                ]
+                                //]
                             ],
                             // Definisci il persistent volume claim
                             volume: [ // Correzione da 'volumes' a 'volume'
