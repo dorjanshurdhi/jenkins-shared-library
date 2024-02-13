@@ -22,7 +22,7 @@ pipeline{
                        'connectionTimeout': 30000,
                        'readTimeout': 60000,
                        'concurrencyLimit': 10,
-                       'podLabels': 'agent-test',
+                       'podLabels': ['jenkins': 'value1', 'label2': 'value2']
                        'podTemplate': [
                            'label': 'kubeagent',
                            'name': 'kube-agent',
