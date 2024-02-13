@@ -94,8 +94,8 @@ def call(Map<String, Object> configMap) {
             //container.setEnvVars(List<TemplateEnvVar> envVars)
             // Creare una lista di oggetti TemplateEnvVar
              def envVarsList = [
-                 new TemplateEnvVar("ENV_VARIABLE_1", "value1"),
-                 new TemplateEnvVar("ENV_VARIABLE_2", "value2")
+                 new TemplateEnvVar("ENV_VARIABLE_1"),
+                 new TemplateEnvVar("ENV_VARIABLE_2")
              ] as List<TemplateEnvVar>
              container.setEnvVars(envVarsList)
 
