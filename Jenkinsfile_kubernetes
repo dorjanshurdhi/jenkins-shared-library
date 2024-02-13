@@ -11,15 +11,13 @@ pipeline{
             steps{
                 script {
                     def configMap = [
-                       'kubernetes-partner-name':"${params.kubernetesPartnerName}",
+                       'kubernetes-partner-name': "${params.kubernetesPartnerName}",
                       // 'serverCertificate': '''
                       //          COPY VALID KUBERNETES CERTIFICATE HERE:
                       //              ''',
                        'serverUrl': "${params.serverUrl}",
                        'namespace': "${params.namespace}",
                        'credentialsId': "${params.credentialsId}",
-                       //'useJenkinsProxy': "${params.useJenkinsProxy}",
-                       //'disableHTTPCertificateCheck': "${params.disableHTTPCertificateCheck}",
                        'useJenkinsProxy': false,
                        'disableHTTPCertificateCheck': false,
                        'jenkinsURL': "${params.jenkinsURL}",
