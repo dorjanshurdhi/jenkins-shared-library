@@ -38,7 +38,7 @@ def call(Map<String, Object> configMap) {
         //cloud.setDisableHTTPCertificateCheck(false)
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
-        int connectionTimeout = configMap['connectionTimeout']
+        int connectionTimeout = (configMap['connectionTimeout'])
         cloud.setConnectionTimeout(connectionTimeout)
         //cloud.setReadTimeout(configMap['readTimeout'])
         //cloud.setConcurrencyLimit(configMap['concurrencyLimit'])
