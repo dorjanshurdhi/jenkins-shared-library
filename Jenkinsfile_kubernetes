@@ -43,7 +43,7 @@ pipeline{
                        'connectionTimeout': "${params.connectionTimeout}",
                        'readTimeout': "${params.readTimeout}",
                        'concurrencyLimit': "${params.concurrencyLimit}",
-                       'podLabels': ['jenkins': 'agent', 'owner': 'partner-3'],
+                       'podLabels': ['jenkins': 'agent', 'owner': "${params.kubernetesPartnerName}"],
                        'podTemplate': [
                            'label': 'kubeagent',
                            'name': 'kube-agent',
