@@ -35,6 +35,7 @@ def call(Map<String, Object> configMap) {
         cloud.setNamespace(configMap['namespace'])
         cloud.setUseJenkinsProxy(configMap['useJenkinsProxy'])
         //cloud.setServerCertificate(configMap['serverCertificate'])
+        cloud.setCredentialsId(configMap['credentialsId'])
         cloud.setSkipTlsVerify(configMap['setSkipTlsVerify'])
         cloud.setJenkinsUrl(configMap['jenkinsURL'])
         cloud.setJenkinsTunnel(configMap['jenkinsTunnel'])
