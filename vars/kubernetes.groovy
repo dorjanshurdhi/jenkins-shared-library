@@ -137,7 +137,6 @@ def checkCredentialsExistence(String credentialsId) {
         println("Jenkins non è inizializzato correttamente")
         return false
     }
-    
     // Otteniamo tutte le credenziali di tipo StandardCredentials
     def credentialsList = CredentialsProvider.lookupCredentials(
         StandardCredentials.class,
@@ -145,13 +144,12 @@ def checkCredentialsExistence(String credentialsId) {
         null,
         null
     )
-    
     // Verifichiamo se il credentialsId è presente nella lista delle credenziali
     def credentialsExist = CredentialsMatchers.firstOrNull(
         credentialsList,
         CredentialsMatchers.withId(credentialsId)
     ) != null
     
-    
+    println "pippo: " +credentialsExist
     return credentialsExist
 }
