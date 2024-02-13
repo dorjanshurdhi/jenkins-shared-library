@@ -44,27 +44,27 @@ def call(Map<String, Object> configMap) {
             def containerData = podTemplateData['container']
             def container = new ContainerTemplate(
                 name: containerData['name'],
-                image: containerData['image'],
-                command: containerData['command'],
-                args: containerData['args'],
-                resourceRequestCpu: containerData['resourceRequestCpu'],
-                resourceRequestMemory: containerData['resourceRequestMemory'],
-                resourceLimitCpu: containerData['resourceLimitCpu'],
-                resourceLimitMemory: containerData['resourceLimitMemory'],
-                alwaysPullImage: containerData['alwaysPullImage'] as boolean,
-                workingDir: containerData['workingDir'],
-                envVars: containerData['envVars'] as List<Map<String, String>>,
-                ports: containerData['ports'] as List<Map<String, Integer>>,
-                ttyEnabled: containerData['ttyEnabled'] as boolean,
-                privileged: containerData['privileged'] as boolean,
-                securityContext: containerData['securityContext'] as Map<String, Object>,
-                // Monta il persistent volume claim nel container
-                volumeMounts: [
-                    [
-                        name: podTemplateData['volume'].name,
-                        mountPath: podTemplateData['volume'].mountPath
-                    ]
-                ]
+                image: containerData['image']//,
+            //    command: containerData['command'],
+            //    args: containerData['args'],
+            //    resourceRequestCpu: containerData['resourceRequestCpu'],
+            //    resourceRequestMemory: containerData['resourceRequestMemory'],
+            //    resourceLimitCpu: containerData['resourceLimitCpu'],
+            //    resourceLimitMemory: containerData['resourceLimitMemory'],
+            //    alwaysPullImage: containerData['alwaysPullImage'] as boolean,
+            //    workingDir: containerData['workingDir'],
+            //    envVars: containerData['envVars'] as List<Map<String, String>>,
+            //    ports: containerData['ports'] as List<Map<String, Integer>>,
+            //    ttyEnabled: containerData['ttyEnabled'] as boolean,
+            //    privileged: containerData['privileged'] as boolean,
+            //    securityContext: containerData['securityContext'] as Map<String, Object>,
+            //    // Monta il persistent volume claim nel container
+            //    volumeMounts: [
+            //        [
+            //            name: podTemplateData['volume'].name,
+            //            mountPath: podTemplateData['volume'].mountPath
+            //        ]
+            //    ]
             )
             podTemplate.getContainers().add(container)
 
