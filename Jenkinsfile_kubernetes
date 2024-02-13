@@ -33,7 +33,8 @@ pipeline{
                                 'privileged': true,
                                 'workingDir': 'home/jenkins/agent',
                                 'command': 'sleep',
-                                'args': '36000'
+                                'args': '36000',
+                                'ttyEnabled': true
                             ]
                         ]
                     ]
