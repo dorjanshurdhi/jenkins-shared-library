@@ -53,11 +53,11 @@ def call(Map<String, Object> configMap) {
         cloud.setPodLabels(podLabels)
 
         def credentials = null
-        def jobName = env.JOB_NAME // Ottieni il nome del job corrente
+        def jobName = env.JOB_NAME 
         def credsList = CredentialsProvider.lookupCredentials(
             StandardUsernamePasswordCredentials.class,
             Jenkins.getInstanceOrNull(),
-            null,
+            'kubernetes-id',
             (List<Domain>) null
         )
         credentials = credsList.find {
