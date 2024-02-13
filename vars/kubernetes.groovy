@@ -93,11 +93,12 @@ def call(Map<String, Object> configMap) {
             //container.setShell(String shell)
             //container.setEnvVars(List<TemplateEnvVar> envVars)
             // Creare una lista di oggetti TemplateEnvVar
-             def envVarsList = [
-                 new TemplateEnvVar("ENV_VARIABLE_1"),
-                 new TemplateEnvVar("ENV_VARIABLE_2")
-             ] as List<TemplateEnvVar>
-             container.setEnvVars(envVarsList)
+            def envVars = []
+            def envVar1 = new TemplateEnvVar("ENV_VARIABLE_1")
+            def envVar2 = new TemplateEnvVar("ENV_VARIABLE_2")
+            envVars.add(envVar1)
+            envVars.add(envVar2)
+            container.setEnvVars(envVars)
 
             //    // Monta il persistent volume claim nel container
             //    volumeMounts: [
