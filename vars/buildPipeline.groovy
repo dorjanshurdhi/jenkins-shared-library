@@ -2,7 +2,10 @@ import java.time.Instant
 
 def call(Map<String, Object> configMap) {
     
-    def VERSION = Instant.now().toEpochMilli()
+    def TIMESTAMP = Instant.now().toEpochMilli()
+    def VERSION = ${TIMESTAMP }
+    println ${VERSION}
+    
     pipeline {
         agent {
             node {
@@ -45,7 +48,7 @@ def call(Map<String, Object> configMap) {
                 steps {
                     script {
                         sh "buildah --version"
-                        sh "buildah  bud -f ./container/Dockerfile -t ${configMap.harborRemoteHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
+                        sh "buildah  bud -f ./container/Dockerfile -t ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
                     }
                 }
             }
