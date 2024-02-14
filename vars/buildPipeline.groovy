@@ -53,44 +53,44 @@ def call(Map<String, Object> configMap) {
                 }
             }
     
-            stage('Push to local harbor') {
-                steps {
-                    script {
-                        withCredentials([usernamePassword(credentialsId: ${configMap.harborCredentialsId}, usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
-                            sh "buildah login --tls-verify=false ${configMap.harborLocalHost} -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD}"
-                           // sh "buildah push --tls-verify=false ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
-                        }
-                    }
-                }
-            }
-    
-            stage('Techdocs generation') {
-                steps {
-                    sh 'techdocs-cli generate --source-dir . --output-dir tmp/techdocs --no-docker --verbose'
-                }
-            }
-        
-            stage('Techdocs publish') {
-                steps {
-                    script {
-                        withCredentials([usernamePassword(credentialsId: ${configMap.awsCredentialsId}, usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
-                            sh "techdocs-cli publish --publisher-type 'awsS3' --directory tmp/techdocs --awsEndpoint ${configMap.minioBucketEndpoint} --storage-name ${configMap.minioBucketName} --awsS3ForcePathStyle true --entity ${configMap.entityNamespace}/${configMap.entityKindPath}/${configMap.appName}"
-                        }
-                    }
-                }
-            }
-    
-            stage('Avvia Job di Sign Images') {
-                steps {
-                    script {
-                        def signImageParams = [
-                            string(name: 'VERSION', value: "${VERSION}")
-                        ]
-                        build job: 'sign-partner-devportal-rust-component-test', parameters: signImageParams
-                        return
-                    }
-                }
-            }
+            //stage('Push to local harbor') {
+            //    steps {
+            //        script {
+            //            withCredentials([usernamePassword(credentialsId: ${configMap.harborCredentialsId}, usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
+            //                sh "buildah login --tls-verify=false ${configMap.harborLocalHost} -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD}"
+            //               // sh "buildah push --tls-verify=false ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
+            //            }
+            //        }
+            //    }
+            //}
+    //
+            //stage('Techdocs generation') {
+            //    steps {
+            //        sh 'techdocs-cli generate --source-dir . --output-dir tmp/techdocs --no-docker --verbose'
+            //    }
+            //}
+        //
+            //stage('Techdocs publish') {
+            //    steps {
+            //        script {
+            //            withCredentials([usernamePassword(credentialsId: ${configMap.awsCredentialsId}, usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
+            //                sh "techdocs-cli publish --publisher-type 'awsS3' --directory tmp/techdocs --awsEndpoint ${configMap.minioBucketEndpoint} --storage-name ${configMap.minioBucketName} --awsS3ForcePathStyle true --entity ${configMap.entityNamespace}/${configMap.entityKindPath}/${configMap.appName}"
+            //            }
+            //        }
+            //    }
+            //}
+    //
+            //stage('Avvia Job di Sign Images') {
+            //    steps {
+            //        script {
+            //            def signImageParams = [
+            //                string(name: 'VERSION', value: "${VERSION}")
+            //            ]
+            //            build job: 'sign-partner-devportal-rust-component-test', parameters: signImageParams
+            //            return
+            //        }
+            //    }
+            //}
         }
     }
 }
