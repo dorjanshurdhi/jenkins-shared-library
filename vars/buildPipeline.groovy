@@ -4,7 +4,7 @@ def call(Map<String, Object> configMap) {
     
     def TIMESTAMP = Instant.now().toEpochMilli()
     def VERSION = TIMESTAMP
-    println ${VERSION}
+    println "version: " +VERSION
 
     pipeline {
         agent {
