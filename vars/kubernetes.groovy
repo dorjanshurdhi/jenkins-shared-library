@@ -1,6 +1,8 @@
 import jenkins.model.*
 import hudson.slaves.*
+import org.jenkinsci.plugins.workflow.job.WorkflowJob
 import org.csanchez.jenkins.plugins.kubernetes.*
+import com.cloudbees.hudson.plugins.folder.*
 import com.cloudbees.plugins.credentials.CredentialsMatchers
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.domains.Domain
