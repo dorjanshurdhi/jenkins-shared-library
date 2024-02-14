@@ -15,6 +15,7 @@ def call(Map<String, Object> configMap) {
         stages {
             stage('Build') {
                 steps {
+                    sh 'env'
                     sh 'mkdir -p container/tmp'
                     sh 'wasm-pack build entity'
                     sh 'cp -r entity/pkg container/tmp'
