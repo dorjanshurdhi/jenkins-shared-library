@@ -31,7 +31,7 @@ def call(Map<String, Object> configMap) {
             return
         } else {
             //crea nuova cartella per il partner
-            folder(kubernetesName)
+            jenkinsInstance.createProject(Folder.class, kubernetesName)
         }
 
         // Imposta la configurazione del plugin Kubernetes
