@@ -10,7 +10,6 @@ def call(Map configMap) {
             }
         }
     
-    configMap['entityName']
         environment {
             ENTITY_NAME           = configMap['entityName']
             APP_NAME              = configMap['appName']
