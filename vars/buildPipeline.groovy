@@ -2,7 +2,7 @@ import java.time.Instant
 
 def call(Map<String, Object> configMap) {
     
-    def timestamp = Instant.now().toEpochMilli()
+    def VERSION = Instant.now().toEpochMilli()
     pipeline {
         agent {
             node {
@@ -10,12 +10,9 @@ def call(Map<String, Object> configMap) {
             }
         }
     
-
-    
         stages {
             stage('Build') {
                 steps {
-                    sh 'env'
                     sh 'mkdir -p container/tmp'
                     sh 'wasm-pack build entity'
                     sh 'cp -r entity/pkg container/tmp'
@@ -43,12 +40,12 @@ def call(Map<String, Object> configMap) {
                     }
                 } 
             }
-    
+
             stage('Build container') {
                 steps {
-                    script {
-                        sh 'buildah --version'
-                        sh 'buildah  bud -f ./container/Dockerfile -t ${HARBOR_LOCAL_HOST}/${ENTITY_NAME}/${APP_NAME}:${VERSION}'
+                    script 
+                        sh "buildah --version"
+                        sh "buildah  bud -f ./container/Dockerfile -t ${configMap.harborRemoteHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
                     }
                     
                 }
@@ -57,9 +54,9 @@ def call(Map<String, Object> configMap) {
             stage('Push to local harbor') {
                 steps {
                     script {
-                        withCredentials([usernamePassword(credentialsId: configMap.harborCredentialsId, usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
-                            sh 'buildah login --tls-verify=false ${HARBOR_LOCAL_HOST} -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD}'
-                            sh 'buildah push --tls-verify=false ${HARBOR_LOCAL_HOST}/${ENTITY_NAME}/${APP_NAME}:${VERSION}'
+                        withCredentials([usernamePassword(credentialsId: ${configMap.harborCredentialsId}, usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
+                            sh "buildah login --tls-verify=false ${configMap.harborLocalHost} -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD}"
+                            sh "buildah push --tls-verify=false ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
                         }
                     }
                 }
@@ -74,8 +71,8 @@ def call(Map<String, Object> configMap) {
             stage('Techdocs publish') {
                 steps {
                     script {
-                        withCredentials([usernamePassword(credentialsId: configMap.awsCredentialsId, usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
-                            sh 'techdocs-cli publish --publisher-type "awsS3" --directory tmp/techdocs --awsEndpoint ${MINIO_BUCKET_ENDPOINT} --storage-name ${MINIO_BUCKET_NAME} --awsS3ForcePathStyle true --entity ${ENTITY_NAMESPACE}/${ENTITY_KIND_PATH}/${APP_NAME}'
+                        withCredentials([usernamePassword(credentialsId: ${configMap.awsCredentialsId}, usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) { 
+                            sh "techdocs-cli publish --publisher-type 'awsS3' --directory tmp/techdocs --awsEndpoint ${configMap.minioBucketEndpoint} --storage-name ${configMap.minioBucketName} --awsS3ForcePathStyle true --entity ${configMap.entityNamespace}/${configMap.entityKindPath}/${configMap.appName}"
                         }
                     }
                 }
