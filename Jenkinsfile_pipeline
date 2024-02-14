@@ -1,6 +1,6 @@
 @Library('jenkins-shared-library') _
 
-def configMap = [
+environment {
     agentLabelName: 'rust-agent',
     entityName: 'partner-devportal-library',
     appName: 'partner-devportal-rust-component-test',
@@ -13,6 +13,6 @@ def configMap = [
     minioBucketName: 'techdocs-storage',
     harborCredentialsId: 'haarbor-credentials',
     awsCredentialsId: 'awsS3-credentials'
-]
+}
 
-buildPipeline(configMap)
+buildPipeline()

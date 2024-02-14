@@ -6,22 +6,11 @@ def call(Map<String, Object> configMap) {
     pipeline {
         agent {
             node {
-                label configMap.agentLabelName ?: 'rust-agent'
+                label 'rust-agent'
             }
         }
     
-        environment {
-            ENTITY_NAME           = configMap['entityName']
-            APP_NAME              = configMap['appName']
-            ENTITY_NAMESPACE      = configMap['entityNamespace']
-            ENTITY_KIND_PATH      = configMap['entityKindPath']
-            AWS_REGION            = configMap['awsRegion']
-            HARBOR_LOCAL_HOST     = configMap['harborLocalHost']
-            HARBOR_REMOTE_HOST    = configMap['harborRemoteHost']
-            MINIO_BUCKET_ENDPOINT = configMap['minioBucketEndpoint']
-            MINIO_BUCKET_NAME     = configMap['minioBucketName']
-            VERSION               = "${timestamp}"
-        }
+
     
         stages {
             stage('Build') {
