@@ -1,4 +1,4 @@
-@Library('jenkin-sshared-library') _
+@Library('jenkins-shared-library') _
 
 def configMap = [
     agentLabelName: 'rust-agent',
@@ -11,8 +11,8 @@ def configMap = [
     harborRemoteHost: 'harbor-registry.dev-portal.svc.cluster.local:5000',
     minioBucketEndpoint: 'http://minio.devops-tools.svc.cluster.local:9000',
     minioBucketName: 'techdocs-storage',
-    harborCredentialsId: 'yourHarborCredentialsId',
-    awsCredentialsId: 'yourAWSCredentialsId'
+    harborCredentialsId: 'haarbor-credentials',
+    awsCredentialsId: 'awsS3-credentials'
 ]
 
 buildPipeline(configMap)

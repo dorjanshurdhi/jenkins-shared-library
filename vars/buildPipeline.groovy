@@ -10,18 +10,18 @@ def call(Map configMap) {
             }
         }
     
-    
+    configMap['entityName']
         environment {
-            ENTITY_NAME           = configMap.entityName ?: 'partner-devportal-library'
-            APP_NAME              = configMap.appName ?: 'partner-devportal-rust-component-test'
-            ENTITY_NAMESPACE      = configMap.entityNamespace ?: 'default'
-            ENTITY_KIND_PATH      = configMap.entityKindPath ?: 'component'
-            AWS_REGION            = configMap.awsRegion ?: 'eu-central-1'
-            HARBOR_LOCAL_HOST     = configMap.harborLocalHost ?: 'harbor-registry.devops-tools.svc.cluster.local:5000'
-            HARBOR_REMOTE_HOST    = configMap.harborRemoteHost ?: 'harbor-registry.dev-portal.svc.cluster.local:5000'
-            MINIO_BUCKET_ENDPOINT = configMap.minioBucketEndpoint ?: 'http://minio.devops-tools.svc.cluster.local:9000'
-            MINIO_BUCKET_NAME     = configMap.minioBucketName ?: 'techdocs-storage'
-            VERSION               = ${timestamp}
+            ENTITY_NAME           = configMap['entityName'] ?: 'partner-devportal-library'
+            APP_NAME              = configMap['appName'] ?: 'partner-devportal-rust-component-test'
+            ENTITY_NAMESPACE      = configMap['entityNamespace'] ?: 'default'
+            ENTITY_KIND_PATH      = configMap['entityKindPath'] ?: 'component'
+            AWS_REGION            = configMap['awsRegion'] ?: 'eu-central-1'
+            HARBOR_LOCAL_HOST     = configMap['harborLocalHost'] ?: 'harbor-registry.devops-tools.svc.cluster.local:5000'
+            HARBOR_REMOTE_HOST    = configMap['harborRemoteHost'] ?: 'harbor-registry.dev-portal.svc.cluster.local:5000'
+            MINIO_BUCKET_ENDPOINT = configMap['minioBucketEndpoint'] ?: 'http://minio.devops-tools.svc.cluster.local:9000'
+            MINIO_BUCKET_NAME     = configMap['minioBucketName'] ?: 'techdocs-storage'
+            VERSION               = "${timestamp}"
         }
     
         stages {
