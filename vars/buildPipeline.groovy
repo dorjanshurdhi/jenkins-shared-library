@@ -58,7 +58,7 @@ def call(Map<String, Object> configMap) {
                     script {
                         withCredentials([usernamePassword(credentialsId: ${configMap.harborCredentialsId}, usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD')]) {
                             sh "buildah login --tls-verify=false ${configMap.harborLocalHost} -u ${HARBOR_USERNAME} -p ${HARBOR_PASSWORD}"
-                            sh "buildah push --tls-verify=false ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
+                           // sh "buildah push --tls-verify=false ${configMap.harborLocalHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
                         }
                     }
                 }
