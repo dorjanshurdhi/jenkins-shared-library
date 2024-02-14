@@ -91,8 +91,8 @@ def call(Map<String, Object> configMap) {
         }
 
         // Aggiungi o aggiorna il cloud Kubernetes alla configurazione globale di Jenkins
-        // Per permettere di fare modifiche al cluter già configurato scommettantare il codice sotto e commentare il
-        // check dallaa riga 26-31
+        // Per permettere di fare modifiche al cluter già configurato scommentare il codice sotto e commentare il
+        // blocco che va dalla riga 26-31
         def clouds = jenkinsInstance.clouds
         //boolean found = false
         //for (c in clouds) {

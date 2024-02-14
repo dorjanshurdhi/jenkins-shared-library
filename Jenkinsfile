@@ -28,30 +28,14 @@ pipeline{
                            'namespace': 'devops-tools',
                            'container': [ 
                                 'name': 'jnlp',
-                                'image': 'ghcr.io/acn-backstage-demo/partner-devportal-library/jenkins-agent:1.1.0',
+                                'image': "${params.image}",
                                 'alwaysPullImage': true,
                                 'privileged': true,
-                                'workingDir': 'home/jenkins/agent',
+                                'workingDir': '"${params.workingDir}",
                                 'command': 'sleep',
                                 'args': '36000',
-                                'ttyEnabled': true,
-                                'envVars': [
-                                    ['key': 'MY_ENV_VAR', 'value': 'my-value']
-                                ],
-                                volumeMounts: [
-                                    [
-                                        name: 'jenkins-agent',
-                                        mountPath: '/tmp'
-                                    ]
-                                ]
-                            ],
-                           volume: [
-                                name: 'jenkins-agent',
-                                persistentVolumeClaim: [
-                                    claimName: 'jenkins-agent'
-                                ]
+                                'ttyEnabled': true
                             ]
-
                         ]
                     ]
                     kubernetes(configMap)                
