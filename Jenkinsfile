@@ -31,7 +31,7 @@ pipeline{
                                 'image': "${params.image}",
                                 'alwaysPullImage': true,
                                 'privileged': true,
-                                'workingDir': '"${params.workingDir}",
+                                'workingDir': "${params.workingDir}",
                                 'command': 'sleep',
                                 'args': '36000',
                                 'ttyEnabled': true
