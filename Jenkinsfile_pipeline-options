@@ -1,0 +1,28 @@
+@Library('jenkin-sshared-library') _
+
+def configMap = [
+    agentLabelName: 'rust-agent',
+    entityName: 'partner-devportal-library',
+    appName: 'partner-devportal-rust-component-test',
+    entityNamespace: 'default',
+    entityKindPath: 'component',
+    awsRegion: 'eu-central-1',
+    harborLocalHost: 'harbor-registry.devops-tools.svc.cluster.local:5000',
+    harborRemoteHost: 'harbor-registry.dev-portal.svc.cluster.local:5000',
+    minioBucketEndpoint: 'http://minio.devops-tools.svc.cluster.local:9000',
+    harborCredentialsId: 'your_harbor_credentials_id',
+    awsCredentialsId: 'your_aws_credentials_id',
+    minioBucketName: 'techdocs-storage',
+    //Scegli i stage da eseguire
+    runBuild: true,
+    runSonarQubeAnalysis: true,
+    runUnitTests: true,
+    runBuildContainer: true,
+    runPushToHarbor: true,
+    runTechdocsGeneration: true,
+    runTechdocsPublish: true,
+    runSignImagesJob: true
+]
+
+  buildPipelineOptions(configMap)
+

@@ -1,1 +1,1 @@
-# jenkins-shared-library
+# partner-devportal-shared-libs
