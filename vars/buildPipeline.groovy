@@ -3,7 +3,7 @@ import java.time.Instant
 def call(Map<String, Object> configMap) {
     
     def TIMESTAMP = Instant.now().toEpochMilli()
-    def VERSION = ${TIMESTAMP}
+    def VERSION = TIMESTAMP
     println ${VERSION}
 
     pipeline {
