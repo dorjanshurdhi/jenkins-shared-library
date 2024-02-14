@@ -38,16 +38,15 @@ def call(Map<String, Object> configMap) {
                     dir('entity'){
                         sh 'cargo test'
                     }
-                } 
+                }
             }
 
             stage('Build container') {
                 steps {
-                    script 
+                    script {
                         sh "buildah --version"
                         sh "buildah  bud -f ./container/Dockerfile -t ${configMap.harborRemoteHost}/${configMap.entityName}/${configMap.appName}:${VERSION}"
                     }
-                    
                 }
             }
     
